@@ -18,7 +18,7 @@ __NOTE:__ Uncomment the `tree_data` method at the end of your file and if your s
 - How might you test your classes?
 
 ##Resources
-[Better Specs](http://betterspecs.org/)
-[Ruby Inheritance](http://rubylearning.com/satishtalim/ruby_inheritance.html)
-[Overriding Methods](http://rubylearning.com/satishtalim/ruby_overriding_methods.html)
+[Better Specs](http://betterspecs.org/)  
+[Ruby Inheritance](http://rubylearning.com/satishtalim/ruby_inheritance.html)  
+[Overriding Methods](http://rubylearning.com/satishtalim/ruby_overriding_methods.html)  
 [Attrs](https://stackoverflow.com/questions/5046831/why-use-rubys-attr-accessor-attr-reader-and-attr-writer)
