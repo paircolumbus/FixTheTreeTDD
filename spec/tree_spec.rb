@@ -1,9 +1,12 @@
 require 'rspec'
 require 'tree'
+require 'pry'
 
 describe 'Tree' do
   it 'should be a Class' do
-    expect(described_class.is_a? 'Class').to be_true
+    binding.pry
+    let(:tree) { Tree.new }
+    expect(tree).is_a? Class).to be true
   end
 end
 
