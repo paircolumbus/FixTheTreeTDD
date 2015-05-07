@@ -1,7 +1,47 @@
 class NoApplesError < StandardError; end
 
+class Tree
+
+  attr_accessor :age, :height, :apples, :alive
+
+  def initialize
+    @age = 0
+    @height = 0
+    @apples = 0
+    @alive = true
+  end
+
+  def any_apple?
+    if @age >= 5 && @alive
+      true
+    else
+      false
+    end
+  end
+
+  def age!
+    @age += 1
+  end
+
+  def height
+    if @age < 30
+      @height = @age
+    else
+      @height = 30
+    end
+  end
+
+  def dead?
+    if @age > 100
+      @alive = true
+    else
+      @alive = false
+    end
+  end
+end
+
 class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_accessor#fill_in :height, :age, :apples, :alive
 
   def initialize
   end
@@ -29,8 +69,8 @@ class Fruit
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter 
 
   def initialize(color, diameter)
   end
@@ -75,4 +115,4 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-tree_data
+# tree_data
