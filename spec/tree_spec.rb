@@ -35,7 +35,7 @@ describe 'Tree' do
   end
 
   it 'can not bear fruit if less than 5' do
-    tree.age = 3
+    tree.age = 4
     expect(tree.any_apple?).to eq false
   end
 
@@ -54,11 +54,27 @@ describe 'Tree' do
     tree.age = 101
     expect(tree.dead?).to eq true
   end
-
 end
 
 describe 'Fruit' do
+
+  let(:fruit) { Fruit.new('orange', 4) }
+
+  it 'has seeds if it is a fruit' do
+    expect(fruit.has_seeds?).to be true
+  end
 end
 
 describe 'Apple' do
+
+  let(:apple) { Apple.new('red', 3) }
+
+  it 'has seeds because it is a fruit' do
+    expect(apple.has_seeds?).to be true
+  end
+
+  it 'is a red apple' do
+    expect(apple.color).to eq 'red'
+  end
+
 end

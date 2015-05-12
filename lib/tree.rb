@@ -64,16 +64,19 @@ class AppleTree
 end
 
 class Fruit
-  def initialize
-    has_seeds = true
-  end
-end
-
-class Apple < Fruit
   attr_reader :color, :diameter 
 
   def initialize(color, diameter)
+    @color = color
+    @diameter = diameter
   end
+
+  def has_seeds?
+    true
+  end
+end
+
+class Apple < Fruit 
 end
 
 #THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
