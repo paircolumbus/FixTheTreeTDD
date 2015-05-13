@@ -22,6 +22,7 @@ describe 'Tree' do
 	3.times { tree.age! }
 	expect(tree.age == 3).to be true
 	expect(tree.apples == 8).to be true
+	expect(tree.height == 3).to be true
   end
 
   it '.add_apples' do
@@ -51,13 +52,24 @@ describe 'Tree' do
   it '.dead?' do
 	tree = Tree.new
 	expect(tree.dead?).to be false
-	42.times { tree.age! }
+	4.times { tree.age! }
 	expect(tree.dead?).to be true
   end
 end
 
 describe 'Fruit' do
+	it '.has_seeds' do
+		fruit = Fruit.new
+		expect(fruit.has_seeds).to be true
+	end
+
 end
 
 describe 'Apple' do
+	it '.initialize' do
+		apple = Apple.new "red", 3
+		expect( apple.has_seeds).to be true
+		expect( apple.color == "red" ).to be true
+		expect( apple.diameter == 3).to be true
+	end
 end
