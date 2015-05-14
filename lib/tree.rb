@@ -2,21 +2,12 @@ class NoApplesError < StandardError; end
 
 class Tree
 
-  attr_accessor :age, :height, :apples, :alive
+  attr_accessor :age, :height, :alive
 
   def initialize
     @age = 0
     @height = 0
-    @apples = 0
     @alive = true
-  end
-
-  def any_apple?
-    if @age >= 5 && @alive
-      true
-    else
-      false
-    end
   end
 
   def age!
@@ -40,27 +31,31 @@ class Tree
   end
 end
 
-class AppleTree
-  attr_accessor#fill_in :height, :age, :apples, :alive
+class AppleTree < Tree
+
+  attr_accessor :apples
 
   def initialize
+    super
+    @apples = 0
   end
-
-  def age!
-  end
+  
 
   def add_apples
   end
 
-  def any_apples?
+  def any_apple?
+    if @age >= 5 && @alive
+      true
+    else
+      false
+    end
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no oranges" unless self.any_apples?
+    raise NoApplesError, "This tree has no oranges" unless self.any_apple?
   end
 
-  def dead?
-  end
 end
 
 class Fruit
@@ -84,7 +79,7 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
   tree.age! until tree.any_apple?
 
@@ -94,7 +89,7 @@ def tree_data
     basket = []
 
     # It places the apple in the basket
-    while tree.any_apples?
+    while tree.any_apple?
       basket << tree.pick_an_apple!
     end
 
@@ -118,4 +113,4 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-# tree_data
+tree_data
