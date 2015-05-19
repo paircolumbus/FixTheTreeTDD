@@ -53,7 +53,14 @@ class AppleTree < Tree
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no oranges" unless self.any_apple?
+    begin  
+      puts 'I am before the raise.'  
+      raise NoApplesError unless self.any_apple?  
+      puts 'The exception was not raised, there are apples.' 
+      #do stuff related to pick an apple 
+    rescue  
+      puts 'This tree has no apples!'  
+    end 
   end
 
 end
@@ -80,37 +87,37 @@ end
 
 def tree_data
   tree = AppleTree.new
-
+  tree.pick_an_apple!
   tree.age! until tree.any_apple?
-
+  tree.pick_an_apple!
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
 
   until tree.dead?
     basket = []
 
-    # It places the apple in the basket
-    while tree.any_apple?
-      basket << tree.pick_an_apple!
-    end
+  #   # It places the apple in the basket
+  #   while tree.any_apple?
+  #     basket << tree.pick_an_apple!
+  #   end
 
-    diameter_sum = 0
+  #   diameter_sum = 0
 
-    basket.each do |apple|
-      diameter_sum += apple.diameter
-    end
+  #   basket.each do |apple|
+  #     diameter_sum += apple.diameter
+  #   end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+  #   avg_diameter = # It's up to you to calculate the average diameter for this harvest.
 
-    puts "Year #{tree.age} Report"
-    puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} oranges with an average diameter of #{avg_diameter} inches"
-    puts ""
+  #   puts "Year #{tree.age} Report"
+  #   puts "Tree height: #{tree.height} feet"
+  #   puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
+  #   puts ""
 
-    # Ages the tree another year
+  #   # Ages the tree another year
     tree.age!
   end
 
-  puts "Alas, the tree, she is dead!"
+  # puts "Alas, the tree, she is dead!"
 end
 
-tree_data
+# tree_data

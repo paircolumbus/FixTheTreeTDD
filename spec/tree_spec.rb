@@ -71,6 +71,12 @@ describe 'Apple tree' do
     expect(apple_tree.any_apple?).to eq false
   end
 
+  it 'cannot pick an apple if no apples' do
+    # binding.pry
+    expect(apple_tree.any_apple?).to eq false
+    expect(apple_tree.pick_an_apple!).to raise_error NoApplesError
+  end
+
   it 'can age' do
     5.times { apple_tree.age! }
     expect(apple_tree.age).to eq 5
@@ -100,7 +106,6 @@ describe 'Fruit' do
   it 'has seeds if it is a fruit' do
     expect(fruit.has_seeds?).to be true
   end
-
 
 end
 
