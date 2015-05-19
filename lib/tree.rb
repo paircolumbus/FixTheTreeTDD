@@ -52,15 +52,9 @@ class AppleTree < Tree
     end
   end
 
-  def pick_an_apple!
-    begin  
-      puts 'I am before the raise.'  
-      raise NoApplesError unless self.any_apple?  
-      puts 'The exception was not raised, there are apples.' 
-      #do stuff related to pick an apple 
-    rescue  
-      puts 'This tree has no apples!'  
-    end 
+  def pick_an_apple!  
+    raise NoApplesError, "There aren't any apples" unless self.any_apple?
+    puts "I picked an apple" 
   end
 
 end
@@ -87,9 +81,9 @@ end
 
 def tree_data
   tree = AppleTree.new
-  tree.pick_an_apple!
+  
   tree.age! until tree.any_apple?
-  tree.pick_an_apple!
+  
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
 
   until tree.dead?

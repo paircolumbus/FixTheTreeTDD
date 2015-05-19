@@ -72,9 +72,12 @@ describe 'Apple tree' do
   end
 
   it 'cannot pick an apple if no apples' do
-    # binding.pry
     expect(apple_tree.any_apple?).to eq false
-    expect(apple_tree.pick_an_apple!).to raise_error NoApplesError
+    expect { apple_tree.pick_an_apple! }.to raise_error NoApplesError
+  end
+
+  it 'can pick an apple if there are apples' do
+    #TODO add this test
   end
 
   it 'can age' do
