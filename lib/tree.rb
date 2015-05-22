@@ -1,9 +1,13 @@
 class NoApplesError < StandardError; end
 
 class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_accessor :height, :age, :apples, :alive
 
   def initialize
+    @height = 0
+    @age = 0
+    @apples = 0
+    @alive = true
   end
 
   def age!
@@ -20,6 +24,7 @@ class AppleTree
   end
 
   def dead?
+    not @alive
   end
 end
 
@@ -29,8 +34,8 @@ class Fruit
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
   end
@@ -41,9 +46,9 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
-  tree.age! until tree.any_apple?
+  tree.age! until tree.any_apples?
 
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
 
