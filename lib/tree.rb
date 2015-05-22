@@ -60,13 +60,9 @@ def tree_data
       basket << tree.pick_an_apple!
     end
 
-    diameter_sum = 0
+    diameter_sum = basket.reduce {|sum, apple| sum += apple.diameter}
 
-    basket.each do |apple|
-      diameter_sum += apple.diameter
-    end
-
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.count
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
