@@ -14,7 +14,7 @@ class AppleTree
     @age += 1
 
     @alive = false if @age > 100
-    rand(70..80).times {add_apples} if @age >= 5
+    rand(176..882).times {add_apples} if @age >= 5
     # Height approaches 30 feet
     @height = 30 - (30 / (age + 1.0)).round(2)
   end
