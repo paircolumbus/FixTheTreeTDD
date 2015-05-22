@@ -35,7 +35,7 @@ describe 'Tree' do
     @tree.add_apples
     apple = @tree.pick_an_apple!
 
-    expect(apple.is_a? 'Apple').to be_true
+    expect(apple.is_a? Apple).to be true
   end
 
   it 'should originally be alive' do
