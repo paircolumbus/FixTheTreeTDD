@@ -6,7 +6,7 @@ class AppleTree
   def initialize
     @height = 0
     @age = 0
-    @apples = 0
+    @apples = []
     @alive = true
   end
 
