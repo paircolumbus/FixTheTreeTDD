@@ -16,7 +16,7 @@ class AppleTree
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no oranges" unless self.any_apples?
+    raise NoApplesError, "This tree has no apples" unless self.any_apples?
   end
 
   def dead?
@@ -65,7 +65,7 @@ def tree_data
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} oranges with an average diameter of #{avg_diameter} inches"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
     puts ""
 
     # Ages the tree another year
