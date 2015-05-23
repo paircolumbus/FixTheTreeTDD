@@ -1,7 +1,6 @@
 #Fix The Apple Tree TDD
 
 __Skill Level:__ Beginner  
-__Time Limit:__ 30m-1hour 
 
 The `tree.rb` script is incomplete. The script should model an apple tree that grows over the years. We should create/plant it, wait for it to bear fruit, pick the fruit and then eventually the tree should die. 
 
