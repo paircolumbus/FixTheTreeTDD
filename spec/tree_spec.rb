@@ -104,7 +104,15 @@ end
 
 describe 'Fruit' do
 
-  let(:fruit) { Fruit.new('orange', 4) }
+  let(:fruit) { Fruit.new('purple', 8) }
+
+  it 'has a default color of purple' do
+    expect(fruit.color).to eq 'purple'
+  end
+
+  it 'has a default diameter of 8' do
+    expect(fruit.diameter).to eq 8
+  end
 
   it 'has seeds if it is a fruit' do
     expect(fruit.has_seeds?).to be true
@@ -114,14 +122,20 @@ end
 
 describe 'Apple' do
 
-  let(:apple) { Apple.new('red', 3) }
+  let(:apple) { Apple.new() }
 
   it 'has seeds because it is a fruit' do
     expect(apple.has_seeds?).to be true
   end
 
-  it 'is a red apple' do
-    expect(apple.color).to eq 'red'
+  it 'is a red, yellow, or green apple' do
+    colors = ['red', 'yellow', 'green']
+    expect(colors).to include(apple.color)
+  end
+
+  it 'should have a diameter to be between 2.5 and 3.25' do
+    expect(apple.diameter).to be >= 2.5
+    expect(apple.diameter).to be <= 3.25 
   end
 
 end

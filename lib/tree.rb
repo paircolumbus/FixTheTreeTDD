@@ -62,7 +62,7 @@ end
 class Fruit
   attr_reader :color, :diameter 
 
-  def initialize(color, diameter)
+  def initialize(color='orange', diameter=3)
     @color = color
     @diameter = diameter
   end
@@ -73,6 +73,14 @@ class Fruit
 end
 
 class Apple < Fruit 
+  attr_reader :color, :diameter
+
+  def initialize
+    super
+    colors = ['red', 'yellow', 'green']
+    @color = colors.sample
+    @diameter = rand(2.5..3.25)
+  end
 end
 
 #THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
@@ -89,29 +97,29 @@ def tree_data
   until tree.dead?
     basket = []
 
-  #   # It places the apple in the basket
-  #   while tree.any_apple?
-  #     basket << tree.pick_an_apple!
-  #   end
+    # It places the apple in the basket
+    while tree.any_apple?
+      basket << tree.pick_an_apple!
+    end
 
-  #   diameter_sum = 0
+    diameter_sum = 0
 
-  #   basket.each do |apple|
-  #     diameter_sum += apple.diameter
-  #   end
+    basket.each do |apple|
+      diameter_sum += apple.diameter
+    end
 
-  #   avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
 
-  #   puts "Year #{tree.age} Report"
-  #   puts "Tree height: #{tree.height} feet"
-  #   puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
-  #   puts ""
+    puts "Year #{tree.age} Report"
+    puts "Tree height: #{tree.height} feet"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
+    puts ""
 
-  #   # Ages the tree another year
+    # Ages the tree another year
     tree.age!
   end
 
-  # puts "Alas, the tree, she is dead!"
+  puts "Alas, the tree, she is dead!"
 end
 
 # tree_data
