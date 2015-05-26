@@ -33,6 +33,11 @@ describe 'AppleTree' do
 end
 	
 describe 'Fruit' do
+	let(:fruit) {Fruit.new}
+
+	it 'should tell if the fruit has seeds' do
+		expect(fruit.has_seeds).to eq(true)
+	end
 end
 
 describe 'Apple' do
@@ -45,5 +50,4 @@ describe 'Apple' do
 	it 'should show the diameter of the apple' do
 		expect(apple.diameter).to eq(3)
 	end
-
 end
