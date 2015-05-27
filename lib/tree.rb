@@ -1,38 +1,57 @@
 class NoApplesError < StandardError; end
 
 class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_reader :height, :age, :apples
 
   def initialize
+    @height = 0
+    @age = 0
+    @apples = []
   end
 
   def age!
-  end
-
-  def add_apples
-  end
-
-  def any_apples?
-  end
-
-  def pick_an_apple!
-    raise NoApplesError, "This tree has no oranges" unless self.any_apples?
+    @apples = []
+    unless dead?
+      @height += rand(1..2)
+      @age += 1
+      add_apples if @age >= 5 && !dead?
+    end
+    @age
   end
 
   def dead?
+    @age > 50
   end
+
+  def add_apples
+    (rand(5..10) * @height).times { @apples << Apple.new }
+  end
+
+  def any_apples?
+    @apples.any?
+  end
+
+  def pick_an_apple!
+    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    @apples.shift
+  end
+
 end
 
 class Fruit
+  attr_reader :has_seeds
+
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
 
-  def initialize(color, diameter)
+  def initialize(color = :red, diameter = rand(4))
+    @color = color
+    @diameter = diameter
   end
 end
 
@@ -41,9 +60,9 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
-  tree.age! until tree.any_apple?
+  tree.age! until tree.any_apples?
 
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
 
@@ -61,11 +80,11 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.count.to_f
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} oranges with an average diameter of #{avg_diameter} inches"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
     puts ""
 
     # Ages the tree another year
@@ -75,4 +94,4 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-tree_data
+# tree_data
