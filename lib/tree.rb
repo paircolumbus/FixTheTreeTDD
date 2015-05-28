@@ -75,4 +75,5 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-tree_data
+# Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
+# tree_data
