@@ -37,14 +37,14 @@ class AppleTree < Tree
 
   def initialize
     super
-    @apples = 0
+    @apples = []
   end
   
 
-  def add_apples
+  def add_apple
   end
 
-  def any_apple?
+  def any_apples?
     if @age >= 5 && @alive
       true
     else
@@ -53,16 +53,19 @@ class AppleTree < Tree
   end
 
   def pick_an_apple!  
-    raise NoApplesError, "There aren't any apples" unless self.any_apple?
-    puts "I picked an apple" 
+    raise NoApplesError, "There aren't any apples" unless self.any_apples?
+    if any_apples?
+      puts "I picked an apple"
+      add_apple
+    end
   end
 
 end
 
 class Fruit
-  attr_reader :color, :diameter 
+  attr_accessor :color, :diameter 
 
-  def initialize(color='orange', diameter=3)
+  def initialize(color: 'orange', diameter: 3)
     @color = color
     @diameter = diameter
   end
@@ -80,6 +83,24 @@ class Apple < Fruit
     colors = ['red', 'yellow', 'green']
     @color = colors.sample
     @diameter = rand(2.5..3.25)
+  end 
+end
+
+class Basket
+  attr_accessor :diameter_array, :size
+
+  def initialize(diameter_array)
+    @diameter_array = diameter_array
+    @size = @diameter_array.count
+  end
+
+  def avg_diameter
+    if size > 0
+      avg = (@diameter_array.reduce(:+)/diameter_array.count).round(1)
+    else
+      avg = 0
+    end
+    avg
   end
 end
 
