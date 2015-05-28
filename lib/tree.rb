@@ -1,38 +1,58 @@
 class NoApplesError < StandardError; end
 
 class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_accessor :height, :age, :apples, :alive
 
   def initialize
+    @height = 0
+    @age = 0
+    @apples = []
+    @alive = true
   end
 
   def age!
+    @age += 1
+
+    @alive = false if @age > 100
+    rand(176..882).times {add_apples} if @age >= 5
+    # Height approaches 30 feet
+    @height = 30 - (30 / (age + 1.0)).round(2)
   end
 
   def add_apples
+    @apples << Apple.new('red', rand(2..4))
   end
 
   def any_apples?
+    @apples.count > 0
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no oranges" unless self.any_apples?
+    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    @apples.pop
   end
 
   def dead?
+    not @alive
   end
 end
 
 class Fruit
+  attr_reader :has_seeds
+
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
+    super()
+
+    @color = color
+    @diameter = diameter
   end
 end
 
@@ -41,9 +61,9 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
-  tree.age! until tree.any_apple?
+  tree.age! until tree.any_apples?
 
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
 
@@ -55,17 +75,12 @@ def tree_data
       basket << tree.pick_an_apple!
     end
 
-    diameter_sum = 0
-
-    basket.each do |apple|
-      diameter_sum += apple.diameter
-    end
-
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    diameter_sum = basket.map(&:diameter).reduce(:+)
+    avg_diameter = (diameter_sum.to_f / basket.count).round(2)
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} oranges with an average diameter of #{avg_diameter} inches"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
     puts ""
 
     # Ages the tree another year
