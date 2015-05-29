@@ -24,28 +24,38 @@ class Tree
 
   def dead?
     if @age > 100
-      @alive = true
-    else
       @alive = false
+    else
+      @alive = true
     end
+    !@alive
   end
 end
 
+
 class AppleTree < Tree
 
-  attr_accessor :apples
-
+  attr_accessor :number_of_apples
+  
   def initialize
     super
-    @apples = []
+    @number_of_apples = 0
+    @bearing_fruit = false
   end
-  
 
-  def add_apple
+  def age!
+    @age += 1
+    @number_of_apples = @age * rand(1..4)
+    if @age == 5
+      @bearing_fruit = true
+    end
+    if self.dead?
+      @bearing_fruit = false
+    end
   end
 
   def any_apples?
-    if @age >= 5 && @alive
+    if @bearing_fruit && @alive && @number_of_apples > 0
       true
     else
       false
@@ -55,14 +65,16 @@ class AppleTree < Tree
   def pick_an_apple!  
     raise NoApplesError, "There aren't any apples" unless self.any_apples?
     if any_apples?
-      puts "I picked an apple"
-      add_apple
+      @number_of_apples -= 1
+      Apple.new()
     end
   end
 
 end
 
+
 class Fruit
+
   attr_accessor :color, :diameter 
 
   def initialize(color: 'orange', diameter: 3)
@@ -75,7 +87,9 @@ class Fruit
   end
 end
 
-class Apple < Fruit 
+
+class Apple < Fruit
+
   attr_reader :color, :diameter
 
   def initialize
@@ -83,57 +97,54 @@ class Apple < Fruit
     colors = ['red', 'yellow', 'green']
     @color = colors.sample
     @diameter = rand(2.5..3.25)
-  end 
+  end
 end
 
-class Basket
-  attr_accessor :diameter_array, :size
 
-  def initialize(diameter_array)
-    @diameter_array = diameter_array
-    @size = @diameter_array.count
+class Basket
+  attr_accessor :apples
+
+  def initialize
+    @apples = []
+  end
+
+  def size
+    @apples.count
   end
 
   def avg_diameter
-    if size > 0
-      avg = (@diameter_array.reduce(:+)/diameter_array.count).round(1)
+    total = 0
+    if (self.size) > 0
+      @apples.each do |a|
+        total += a.diameter
+      end
+      (total/self.size).round(1)
     else
-      avg = 0
+      total
     end
-    avg
   end
 end
 
-#THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
-# avg_diameter (line 58) will raise an error.
-# it should calculate the diameter of the apples in the basket
 
 def tree_data
   tree = AppleTree.new
   
-  tree.age! until tree.any_apple?
+  tree.age! until tree.any_apples?
+  puts 'Number of apples', tree.number_of_apples
+  puts "The tree is #{tree.age} years old and #{tree.height} feet tall."
+  puts "It has #{tree.number_of_apples} apples the first year."
   
-  puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
-
   until tree.dead?
-    basket = []
+    basket = Basket.new
 
     # It places the apple in the basket
-    while tree.any_apple?
-      basket << tree.pick_an_apple!
+    while tree.any_apples?
+      basket.apples << tree.pick_an_apple!
     end
-
-    diameter_sum = 0
-
-    basket.each do |apple|
-      diameter_sum += apple.diameter
-    end
-
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{basket.avg_diameter} inches"
     puts ""
 
     # Ages the tree another year
@@ -143,4 +154,4 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-# tree_data
+tree_data

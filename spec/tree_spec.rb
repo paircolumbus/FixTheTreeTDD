@@ -2,6 +2,7 @@ require 'rspec'
 require 'tree'
 require 'pry'
 
+
 describe 'Tree' do
 
   let(:tree) { Tree.new }
@@ -39,6 +40,7 @@ describe 'Tree' do
   end
 end
 
+
 describe 'Apple tree' do
 
   let(:apple_tree) { AppleTree.new }
@@ -51,33 +53,44 @@ describe 'Apple tree' do
     expect(apple_tree).to be_a AppleTree
     expect(apple_tree.age).to eq 0
     expect(apple_tree.height).to eq 0
-    expect(apple_tree.apples).to eq []
     expect(apple_tree.alive).to eq true
   end
 
   it 'can bear fruit starting at 5 years' do
-    apple_tree.age = 5
+    5.times { apple_tree.age! }
     expect(apple_tree.any_apples?).to eq true 
+    expect(apple_tree.number_of_apples).to be >= 5
+    expect(apple_tree.number_of_apples).to be <= 20
   end
 
   it 'can not bear fruit if dead' do
-    apple_tree.age = 6
     apple_tree.alive = false
     expect(apple_tree.any_apples?).to eq false
   end
 
   it 'can not bear fruit if less than 5' do
-    apple_tree.age = 4
+    4.times { apple_tree.age! }
     expect(apple_tree.any_apples?).to eq false
   end
 
   it 'cannot pick an apple if no apples' do
+    apple_tree.number_of_apples = 0
     expect(apple_tree.any_apples?).to eq false
     expect { apple_tree.pick_an_apple! }.to raise_error NoApplesError
   end
 
-  it 'can pick an apple if there are apples' do
-    #TODO add this test
+  it 'can pick an apple if there is one apple' do
+    5.times { apple_tree.age! }
+    apple_tree.number_of_apples = 1
+    expect(apple_tree.any_apples?). to be true
+    apple = apple_tree.pick_an_apple!
+    expect(apple.class).to eq Apple
+  end
+
+  it 'can pick an apple if there are multiple apples' do
+    6.times { apple_tree.age! }
+    apple = apple_tree.pick_an_apple!
+    expect(apple.class).to eq Apple
   end
 
   it 'can age' do
@@ -101,6 +114,7 @@ describe 'Apple tree' do
     expect(apple_tree.dead?).to eq true
   end
 end
+
 
 describe 'Fruit' do
 
@@ -128,6 +142,7 @@ describe 'Fruit' do
   end
 end
 
+
 describe 'Apple' do
 
   let(:apple) { Apple.new() }
@@ -141,43 +156,51 @@ describe 'Apple' do
     expect(colors).to include(apple.color)
   end
 
-  it 'should have a diameter to be between 2.5 and 3.25' do
+  it 'should have a diameter between 2.5 and 3.25, inclusive' do
     expect(apple.diameter).to be >= 2.5
     expect(apple.diameter).to be <= 3.25 
   end
 end
 
+
 describe 'Basket' do
-  let(:basket) { Basket.new([2.2, 3.1, 2.4, 5.5]) }
-  let(:empty_basket) { Basket.new([]) }
+
+  let(:basket) { Basket.new() }
   let(:tree) { AppleTree.new() }
 
   it 'should be a Class' do
     expect(Basket.is_a? Class).to be true
   end
 
-  it 'can be initialized with an array of diameters' do
-    expect(basket.diameter_array).to eq [2.2, 3.1, 2.4, 5.5]
+  it 'has no apples when initialized' do
+    apples = []
+    expect(basket.size).to eq 0
+    expect(basket.avg_diameter).to eq 0
   end
 
-  it 'should have a method for calculating avg diameter' do
-    expect(basket.avg_diameter).to eq 3.3
-  end
-
-  it 'should have a size' do
-    expect(basket.size).to eq 4
+  it 'can calculate an average diameter' do
+    6.times { tree.age! }
+    6.times { basket.apples << tree.pick_an_apple! }
+    
+    basket.apples[0].diameter = 2.6
+    basket.apples[1].diameter = 3.25
+    basket.apples[2].diameter = 2.9
+    basket.apples[3].diameter = 2.8
+    basket.apples[4].diameter = 3.1
+    basket.apples[5].diameter = 2.5
+    
+    expect(basket.size).to eq 6
+    expect(basket.avg_diameter).to eq 2.9
   end
 
   it 'can be empty' do
-    expect(empty_basket.size).to eq 0
-    expect(empty_basket.avg_diameter).to eq 0
+    expect(basket.size).to eq 0
+    expect(basket.avg_diameter).to eq 0
   end
 
-  it 'can be added to if there are any apples' do
-    #need to age the tree so there are apples first
-    #figure out how to connect basket/tree classes for picking
-    basket << tree.pick_an_apple!
-    expect(basket.size).to eq 5
+  it 'can be added to' do
+    6.times { tree.age! }
+    6.times { basket.apples << tree.pick_an_apple! }
+    expect(basket.size).to eq 6
   end
 end
-
