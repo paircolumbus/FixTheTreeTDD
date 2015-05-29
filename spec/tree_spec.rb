@@ -181,13 +181,10 @@ describe 'Basket' do
   it 'can calculate an average diameter' do
     6.times { tree.age! }
     6.times { basket.apples << tree.pick_an_apple! }
-    
-    basket.apples[0].diameter = 2.6
-    basket.apples[1].diameter = 3.25
-    basket.apples[2].diameter = 2.9
-    basket.apples[3].diameter = 2.8
-    basket.apples[4].diameter = 3.1
-    basket.apples[5].diameter = 2.5
+
+    # Replace random diameters with known ones for the test
+    diameters = [2.6, 3.25, 2.9, 2.8, 3.1, 2.5]
+    basket.apples.map.with_index { |apple, i| apple.diameter = diameters[i] }
     
     expect(basket.size).to eq 6
     expect(basket.avg_diameter).to eq 2.9
