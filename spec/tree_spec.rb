@@ -196,8 +196,8 @@ describe 'Basket' do
   end
 
   it 'can be added to' do
-    6.times { tree.age! }
-    6.times { basket.apples << tree.pick_an_apple! }
-    expect(basket.size).to eq 6
+    63.times { tree.age! }
+    1.times { basket.apples << tree.pick_an_apple! }
+    expect(basket.size).to eq 1
   end
 end
