@@ -10,41 +10,43 @@ describe 'Tree' do
   end
 
   it '.initialize' do
-  	expect(tree.height == 0).to be true
-  	expect(tree.age == 0).to be true
-  	expect(tree.apples == 0).to be true
+    expect(tree.height).to eq 0
+    expect(tree.age).to eq 0
+    expect(tree.apples.length).to eq 0
   	expect(tree.alive).to be true
   end
-  	
+
   # as the tree ages, more apples grow.
   # 2^age apples should be on the tree after it ages
   it '.age!' do
-  	expect(tree.age == 0).to be true
+    expect(tree.age).to eq 0
   	3.times { tree.age! }
-  	expect(tree.age == 3).to be true
-  	expect(tree.apples == 8).to be true
-  	expect(tree.height == 3).to be true
+    expect(tree.age).to eq 3
+    expect(tree.apples.length).to eq 6
+    expect(tree.height).to eq 3
   end
 
   it '.add_apples' do
-  	expect(tree.apples == 0).to be true
+    expect(tree.apples.length).to eq 0
   	3.times { tree.age! }
-  	expect(tree.apples == 8).to be true
+    expect(tree.apples.length).to eq 6
   end
 
   it '.any_apples?' do
   	expect( tree.any_apples? ).to be false
-  	tree.age!
+  	2.times { tree.age! }
   	expect( tree.any_apples? ).to be true
-  	2.times { tree.pick_an_apple! }
+  	3.times { tree.pick_an_apple! }
   	expect( tree.any_apples? ).to be false
   end
 
   it '.pick_an_apple!' do
     expect{tree.pick_an_apple!}.to raise_error(NoApplesError)
   	tree.age!
-  	tree.pick_an_apple!
-  	expect(tree.apples == 1).to be true
+  	apple = tree.pick_an_apple!
+    expect(apple.color).to eq "red"
+    expect(apple.diameter).to be_within(4).of(4)
+    expect(tree.apples.length).to eq 0
   end
 
   it '.dead?' do

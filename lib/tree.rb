@@ -4,31 +4,30 @@ class Tree
   attr_reader :height, :age, :apples, :alive
 
   def initialize
-  	@height = 0
-	@age = 0
-	@apples = 0
-	@alive = true
+    @height = 0
+	  @age = 0
+	  @apples = []
+	  @alive = true
   end
 
   def age!
   	@age += 1
-	add_apples
-	@height += 1
+	  add_apples
+	  @height += 1
   end
 
+  # adds # of apples equal to age
   def add_apples
-  	@apples = 2** @age
+    @age.times { @apples.push(Apple.new("red", rand(8))) }
   end
 
   def any_apples?
-  	@apples > 0
+  	@apples.length > 0
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no oranges" unless self.any_apples?
-	@apples -= 1
-	apple = Apple.new("red", 2)
-	return apple
+    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    @apples.pop
   end
 
   def dead?
@@ -49,7 +48,7 @@ class Fruit
 end
 
 class Apple < Fruit
-  attr_reader :color, :diameter 
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
 	super()
@@ -60,7 +59,7 @@ class Apple < Fruit
   def diameter()
 	@diameter
   end
-  
+
 end
 
 #THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
@@ -88,7 +87,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = diameter_sum/basket.length 
+    avg_diameter = diameter_sum/basket.length
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
