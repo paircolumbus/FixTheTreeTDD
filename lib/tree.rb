@@ -6,7 +6,8 @@ end
 class AppleTree < Tree
   attr_accessor :height, :age, :apples, :alive
 
-  def initialize
+  def initialize(age: 0)
+    @age ||= age
   end
 
   def age!
