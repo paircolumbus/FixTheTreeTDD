@@ -66,6 +66,21 @@ describe AppleTree do
     end
   end
 
+  describe '#pick_an_apple!' do
+    it 'returns an apple if there are apples' do
+      subject.apples = 4
+      object = subject.pick_an_apple!
+      expect(subject.apples).to eq 3
+      expect(object).to be_an Apple
+    end
+    it 'eventually will lead to a NoApplesError message' do
+      subject.apples = 4
+      5.times do
+        subject.pick_an_apple!
+      end
+      expect{ subject.pick_an_apple! }.to raise_error
+    end
+  end
 end
 
 describe 'Fruit' do
