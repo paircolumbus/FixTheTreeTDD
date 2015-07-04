@@ -16,6 +16,7 @@ class AppleTree < Tree
   end
 
   def add_apples
+    self.apples = apples + Random.rand(5)
   end
 
   def any_apples?
