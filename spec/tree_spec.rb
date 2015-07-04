@@ -32,6 +32,10 @@ describe AppleTree do
       expect(object.age).to eq 100
     end
 
+    it 'should start with no apples on it' do
+      expect(subject.apples).to eq 0
+    end
+
   end
 
 
@@ -41,6 +45,13 @@ describe AppleTree do
       expect(subject.age).to eq 1
       subject.age!
       expect(subject.age).to eq 2
+    end
+  end
+
+  describe '#add_apples' do
+    it 'adds some amount apples' do
+      subject.add_apples
+      expect(subject.apples).to_not eq 0
     end
   end
 

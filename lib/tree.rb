@@ -8,6 +8,7 @@ class AppleTree < Tree
 
   def initialize(age: 0)
     self.age ||= age
+    self.apples ||= 0
   end
 
   def age!
