@@ -33,7 +33,7 @@ describe AppleTree do
     end
 
     it 'should start with no apples on it' do
-      expect(subject.apples).to eq 0
+      expect(subject.apples.size).to eq 0
     end
 
   end
@@ -51,27 +51,30 @@ describe AppleTree do
   describe '#add_apples' do
     it 'adds some amount apples' do
       subject.add_apples
-      expect(subject.apples).to_not eq 0
+      expect(subject.apples.size).to_not eq 0
     end
   end
 
   describe '#any_apples?' do
     it 'returns false when there are no apples' do
-      subject.apples = 0
+      subject.apples = []
       expect(subject.any_apples?).to be_falsey
     end
     it 'returns true when there are apples' do
-      subject.apples = 1
+      subject.apples = [Apple.new]
       expect(subject.any_apples?).to be_truthy
     end
   end
 
   describe '#pick_an_apple!' do
     it 'returns an apple if there are apples' do
-      subject.apples = 4
+      subject.add_apples
       object = subject.pick_an_apple!
-      expect(subject.apples).to eq 3
       expect(object).to be_an Apple
+    end
+    it 'reduces the amount of apples' do
+      subject.add_apples
+      expect{subject.pick_an_apple!}.to change{subject.apples.size}.by(-1)
     end
     it 'eventually will lead to a NoApplesError message' do
       subject.apples = 4

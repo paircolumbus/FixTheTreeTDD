@@ -8,7 +8,7 @@ class AppleTree < Tree
 
   def initialize(age: 0)
     self.age ||= age
-    self.apples ||= 0
+    self.apples ||= []
   end
 
   def age!
@@ -16,16 +16,18 @@ class AppleTree < Tree
   end
 
   def add_apples
-    self.apples = apples + Random.rand(5)
+    (Random.rand(5)+1).times do
+      self.apples << Apple.new
+    end
   end
 
   def any_apples?
-    apples > 0
+    apples.size > 0
   end
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no oranges" unless self.any_apples?
-    self.apples = apples - 1
+    self.apples.delete_at(Random.rand(apples.size))
   end
 
   def dead?
@@ -41,7 +43,7 @@ end
 class Apple < Fruit
   attr_reader :color, :diameter
 
-  def initialize(color, diameter)
+  def initialize(color: 'red', diameter: 4)
   end
 end
 
