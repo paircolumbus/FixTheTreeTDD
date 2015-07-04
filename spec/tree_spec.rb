@@ -55,6 +55,17 @@ describe AppleTree do
     end
   end
 
+  describe '#any_apples?' do
+    it 'returns false when there are no apples' do
+      subject.apples = 0
+      expect(subject.any_apples?).to be_falsey
+    end
+    it 'returns true when there are apples' do
+      subject.apples = 1
+      expect(subject.any_apples?).to be_truthy
+    end
+  end
+
 end
 
 describe 'Fruit' do
