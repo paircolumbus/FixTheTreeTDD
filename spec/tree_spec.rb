@@ -76,7 +76,10 @@ describe AppleTree do
     it 'eventually will lead to a NoApplesError message' do
       subject.apples = 4
       5.times do
-        subject.pick_an_apple!
+        begin
+          subject.pick_an_apple!
+        rescue
+        end
       end
       expect{ subject.pick_an_apple! }.to raise_error
     end

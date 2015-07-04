@@ -25,6 +25,7 @@ class AppleTree < Tree
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no oranges" unless self.any_apples?
+    self.apples = apples - 1
   end
 
   def dead?
