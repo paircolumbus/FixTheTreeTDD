@@ -20,6 +20,7 @@ class AppleTree < Tree
   end
 
   def any_apples?
+    apples > 0
   end
 
   def pick_an_apple!
