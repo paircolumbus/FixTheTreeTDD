@@ -39,6 +39,8 @@ describe AppleTree do
     it 'increases the age by 1' do
       subject.age!
       expect(subject.age).to eq 1
+      subject.age!
+      expect(subject.age).to eq 2
     end
   end
 

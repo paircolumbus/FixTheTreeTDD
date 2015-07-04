@@ -7,10 +7,11 @@ class AppleTree < Tree
   attr_accessor :height, :age, :apples, :alive
 
   def initialize(age: 0)
-    @age ||= age
+    self.age ||= age
   end
 
   def age!
+    self.age = age + 1
   end
 
   def add_apples
