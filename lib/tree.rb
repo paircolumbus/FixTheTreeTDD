@@ -15,6 +15,7 @@ class AppleTree < Tree
   def age!
     self.age = age + 1
     self.height += Random.rand(5)+1
+    age > 20 && age < 40 && add_apples
   end
 
   def add_apples
