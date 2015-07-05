@@ -100,8 +100,11 @@ describe AppleTree do
 
 end
 
-describe 'Fruit' do
+describe Fruit do
 end
 
-describe 'Apple' do
+describe Apple do
+  it 'should have some diameter' do
+    expect(subject.diameter).to be > 0
+  end
 end
