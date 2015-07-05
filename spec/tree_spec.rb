@@ -77,16 +77,27 @@ describe AppleTree do
       expect{subject.pick_an_apple!}.to change{subject.apples.size}.by(-1)
     end
     it 'eventually will lead to a NoApplesError message' do
-      subject.apples = 4
-      5.times do
-        begin
-          subject.pick_an_apple!
-        rescue
-        end
+      subject.apples = 4.times.map{Apple.new}
+      4.times do
+        subject.pick_an_apple!
       end
       expect{ subject.pick_an_apple! }.to raise_error
     end
   end
+
+  describe '#dead?' do
+    it 'trees only last for 1000 years' do
+      999.times do
+        subject.age!
+        expect(subject.dead?).to be_falsey
+      end
+      subject.age!
+      expect(subject.dead?).to be_falsey
+      subject.age!
+      expect(subject.dead?).to be_truthy
+    end
+  end
+
 end
 
 describe 'Fruit' do
