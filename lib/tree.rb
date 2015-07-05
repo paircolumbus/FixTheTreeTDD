@@ -44,7 +44,8 @@ end
 class Apple < Fruit
   attr_reader :color, :diameter
 
-  def initialize(color: 'red', diameter: 4)
+  def initialize(color: 'red', diameter: Random.rand(5)+1)
+    @diameter = diameter
   end
 end
 
