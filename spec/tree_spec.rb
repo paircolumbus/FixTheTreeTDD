@@ -13,14 +13,6 @@ describe AppleTree do
     expect(described_class.is_a? Class).to eq true
   end
 
-  it 'should be a subclass of Tree' do
-    expect(described_class < Tree).to eq true
-  end
-
-  subject do
-    AppleTree.new
-  end
-
   context 'when initialized' do
 
     it 'should start at 0 years of age' do
@@ -102,8 +94,8 @@ describe AppleTree do
   end
 
   describe '#dead?' do
-    it 'trees only last for 1000 years' do
-      999.times do
+    it 'trees only last for 60 years' do
+      59.times do
         subject.age!
         expect(subject.dead?).to be_falsey
       end

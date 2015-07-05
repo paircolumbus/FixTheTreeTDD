@@ -1,9 +1,6 @@
 class NoApplesError < StandardError; end
 
-class Tree
-end
-
-class AppleTree < Tree
+class AppleTree
   attr_accessor :height, :age, :apples, :alive
 
   def initialize(age: 0)
@@ -34,8 +31,11 @@ class AppleTree < Tree
   end
 
   def dead?
-    age > 1000
+    age > 60
   end
+end
+
+class Tree < AppleTree
 end
 
 class Fruit
@@ -57,7 +57,7 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = AppleTree.new
+  tree = Tree.new
 
   tree.age! until tree.any_apples?
 
@@ -77,7 +77,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = (diameter_sum * 1.0 / basket.size).round(2)
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
