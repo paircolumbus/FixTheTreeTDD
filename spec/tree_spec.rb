@@ -49,6 +49,19 @@ describe AppleTree do
     it 'increases the height of the tree' do
       expect{subject.age!}.to change{subject.height}.by_at_least(1)
     end
+    it 'sometimes grows apples' do
+      20.times do
+        subject.age!
+      end
+      expect(subject.apples.size).to eq 0
+      20.times do
+        subject.age!
+      end
+      expect(subject.apples.size).to be > 0
+      20.times do
+        expect{subject.age!}.to change{subject.apples.size}.by(0)
+      end
+    end
   end
 
   describe '#add_apples' do
