@@ -31,6 +31,7 @@ class AppleTree < Tree
   end
 
   def dead?
+    age > 1000
   end
 end
 
