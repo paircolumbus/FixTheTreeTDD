@@ -55,7 +55,7 @@ end
 def tree_data
   tree = Tree.new
 
-  tree.age! until tree.any_apple?
+  tree.age! until tree.any_apples?
 
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
 
