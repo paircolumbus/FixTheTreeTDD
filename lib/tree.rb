@@ -9,10 +9,12 @@ class AppleTree < Tree
   def initialize(age: 0)
     self.age ||= age
     self.apples ||= []
+    self.height = 0;
   end
 
   def age!
     self.age = age + 1
+    self.height += Random.rand(5)+1
   end
 
   def add_apples
