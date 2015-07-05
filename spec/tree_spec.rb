@@ -6,12 +6,6 @@ describe Tree do
   it 'should be a Class' do
     expect(described_class.is_a? Class).to eq true
   end
-end
-
-describe AppleTree do
-  it 'should be a Class' do
-    expect(described_class.is_a? Class).to eq true
-  end
 
   context 'when initialized' do
 
@@ -20,7 +14,7 @@ describe AppleTree do
     end
 
     it 'it can start at any year of age specified' do
-      object = AppleTree.new(age: 100)
+      object = described_class.new(age: 100)
       expect(object.age).to eq 100
     end
 

@@ -4,14 +4,10 @@ class AppleTree
   attr_accessor :height, :age, :apples, :alive
 
   def initialize(age: 0)
-    self.age ||= age
     self.apples ||= []
-    self.height = 0;
   end
 
   def age!
-    self.age = age + 1
-    self.height += Random.rand(5)+1
     age > 20 && age < 40 && add_apples
   end
 
@@ -36,6 +32,17 @@ class AppleTree
 end
 
 class Tree < AppleTree
+  def initialize(age: 0)
+    self.age ||= age
+    self.height = 0;
+    super
+  end
+
+  def age!
+    self.age = age + 1
+    self.height += Random.rand(5)+1
+    super
+  end
 end
 
 class Fruit
