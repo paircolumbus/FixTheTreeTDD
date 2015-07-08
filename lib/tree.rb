@@ -16,7 +16,7 @@ class AppleTree
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no oranges" unless self.any_apples?
+    raise NoApplesError, "This tree has no apples" unless self.any_apples?
   end
 
   def dead?
@@ -43,7 +43,7 @@ end
 def tree_data
   tree = Tree.new
 
-  tree.age! until tree.any_apple?
+  tree.age! until tree.any_apples?
 
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
 
