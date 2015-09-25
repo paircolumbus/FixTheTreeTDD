@@ -4,9 +4,13 @@ class Tree
   attr_reader :height, :age, :apples, :alive
 
   def initialize
+    @age = 0
+    @height = 1
   end
 
   def age!
+    @age += 1
+    @height += 1
   end
 
   def add_apples
@@ -25,7 +29,7 @@ end
 
 class Fruit
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
