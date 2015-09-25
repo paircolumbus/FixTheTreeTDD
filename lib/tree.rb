@@ -6,17 +6,23 @@ class Tree
   def initialize
     @age = 0
     @height = 1
+    @apples = []
   end
 
   def age!
     @age += 1
     @height += 1
+    if @age >= 3
+      add_apples (@age * 2 - @apples.length)
+    end
   end
 
-  def add_apples
+  def add_apples number
+    number.times { @apples.push(Apple.new( :red, 4 )) }
   end
 
   def any_apples?
+    !@apples.empty?
   end
 
   def pick_an_apple!
@@ -24,6 +30,7 @@ class Tree
   end
 
   def dead?
+    !@alive
   end
 end
 
