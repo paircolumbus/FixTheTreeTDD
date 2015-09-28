@@ -1,7 +1,5 @@
 class NoApplesError < StandardError; end
 
-RANDOM = Random.new;
-
 class Tree
   attr_reader :height, :age, :apples, :alive
 
@@ -14,23 +12,23 @@ class Tree
 
   def age!
     @age += 1
-    if @alive
+    if alive
       @height += 1
-      add_apples (@age * 2 - @apples.length)
+      add_apples (age * 2 - apples.length)
     end
-    if @age > 30
+    if age > 30
       @alive = false
     end
   end
 
   def add_apples number
-    if @age >= 3
-      number.times { @apples.push(Apple.new( :red, RANDOM.rand(5)+3 )) }
+    if age >= 3
+      number.times { @apples.push(Apple.new( :red, rand(3..7) )) }
     end
   end
 
   def any_apples?
-    !@apples.empty?
+    !apples.empty?
   end
 
   def pick_an_apple!
@@ -39,7 +37,7 @@ class Tree
   end
 
   def dead?
-    !@alive
+    !alive
   end
 end
 
@@ -98,4 +96,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-tree_data
+#tree_data
