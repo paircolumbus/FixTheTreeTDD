@@ -27,6 +27,10 @@ describe Tree do
       expect(tree.dead?).to be false
     end
 
+    it "get apple should return an error when no apples available" do
+      expect{tree.pick_an_apple!}.to raise_error(NoApplesError)
+    end
+
   end
 
   context "when aging first years" do
@@ -55,10 +59,20 @@ describe Tree do
 
   context "when getting apples" do
 
-    before {tree.add_apples}
+    before {
+      tree.add_apples
+    }
+
 
     it "has some apples" do
       expect(tree.any_apples?).to be true
+    end
+
+    it "get apple should return an apple fruit" do
+      expected_apples = tree.apples - 1
+      expect(tree.pick_an_apple!.is_a? Apple).to be true
+      expect(tree.apples == expected_apples).to be true
+
     end
 
   end
