@@ -16,7 +16,7 @@ class Tree
   end
 
   def add_apples
-
+    @apples += rand(30)
   end
 
   def any_apples?
