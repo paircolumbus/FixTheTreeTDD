@@ -16,7 +16,7 @@ class Tree
   end
 
   def add_apples
-    @apples += rand(30)
+    @apples += rand(30) + 1
   end
 
   def any_apples?
@@ -25,6 +25,8 @@ class Tree
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    @apples -= 1
+    Apple.new((rand(2)%2 == 0)?'red':'yellow', rand(5) + 1)
   end
 
   def dead?

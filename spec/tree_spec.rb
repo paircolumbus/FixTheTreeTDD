@@ -72,7 +72,6 @@ describe Tree do
       expected_apples = tree.apples - 1
       expect(tree.pick_an_apple!.is_a? Apple).to be true
       expect(tree.apples == expected_apples).to be true
-
     end
 
   end
