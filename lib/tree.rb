@@ -11,9 +11,12 @@ class Tree
   end
 
   def age!
+    @age+= 1
+    @height += 1
   end
 
   def add_apples
+
   end
 
   def any_apples?
