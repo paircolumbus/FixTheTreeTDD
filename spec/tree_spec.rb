@@ -12,7 +12,7 @@ describe Tree do
   context "when initialized" do
 
     it "gives the default height" do
-      expect(tree.height).to eq(1)
+      expect(tree.height).to eq(0)
     end
 
     it "gives the default age" do

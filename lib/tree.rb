@@ -1,10 +1,13 @@
 class NoApplesError < StandardError; end
 
 class Tree
-  attr_accessor :height, :age, :apples, :alive
+  attr_reader :height, :age, :apples, :alive
 
   def initialize
-
+    @height = 0
+    @age = 0
+    @apples = 0
+    @alive = true
   end
 
   def age!
@@ -14,6 +17,7 @@ class Tree
   end
 
   def any_apples?
+    @apples > 0
   end
 
   def pick_an_apple!
@@ -21,6 +25,7 @@ class Tree
   end
 
   def dead?
+    ! @alive
   end
 end
 
