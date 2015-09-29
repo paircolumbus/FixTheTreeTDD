@@ -29,6 +29,30 @@ describe Tree do
 
   end
 
+  context "when aging first years" do
+
+    before {
+      5 * tree.age!
+    }
+
+    it "increases its height" do
+      expect(tree.height).to be > 0
+    end
+
+    it "gets older" do
+      expect(tree.age).to be > 0
+    end
+
+    it "has no apples" do
+      expect(tree.any_apples?).to be false
+    end
+
+    it "is alive" do
+      expect(tree.dead?).to be false
+    end
+
+  end
+
 
 end
 
