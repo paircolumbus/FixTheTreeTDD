@@ -53,6 +53,16 @@ describe Tree do
 
   end
 
+  context "when getting apples" do
+
+    before {tree.add_apples}
+
+    it "has some apples" do
+      expect(tree.any_apples?).to be true
+    end
+
+  end
+
 
 end
 
