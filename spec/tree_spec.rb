@@ -35,25 +35,20 @@ describe Tree do
 
   context "when aging first years" do
 
-    before {
-      4.times{tree.age!}
-    }
-
-    it "increases its height" do
-      expect(tree.height).to  be > 0
+    it " is alive and growing" do
+      prev_height = 0
+      prev_age = 0
+      4.times{
+        tree.age!
+        expect(tree.height).to  be > prev_height
+        expect(tree.age).to  be > prev_age
+        expect(tree.any_apples?).to  be false
+        expect(tree.dead?).to  be false
+        prev_age = tree.age
+        prev_height = tree.height
+      }
     end
 
-    it "gets older" do
-      expect(tree.age).to be > 0
-    end
-
-    it "has no apples" do
-      expect(tree.any_apples?).to be false
-    end
-
-    it "is alive" do
-      expect(tree.dead?).to be false
-    end
 
   end
 
@@ -76,7 +71,7 @@ describe Tree do
 
   end
 
-  context "tree gets apples each year starting at age 5" do
+  context " when mature and producing apples" do
     before {
       5.times{tree.age!}
     }
@@ -87,7 +82,7 @@ describe Tree do
 
   end
 
-  context "tree dies at 200 years" do
+  context "tree dies " do
     before {
       201.times{tree.age!}
     }
