@@ -114,7 +114,19 @@ describe Fruit do
 end
 
 describe Apple do
+
+  expectedColor = 'yellow'
+  expectedDiameter = 2
+  let(:apple){Apple.new(expectedColor, expectedDiameter)}
+
   it 'should be a Class' do
     expect(described_class.is_a? Class).to be true
   end
+
+  it 'should have attributes initialized' do
+    expect(apple.color).to eq(expectedColor)
+    expect(apple.diameter).to eq(expectedDiameter)
+    expect(apple.has_seeds?).to be true
+  end
+
 end
