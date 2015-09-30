@@ -41,9 +41,15 @@ class Tree
 end
 
 class Fruit
+
+  attr_reader :has_seeds
+  alias_method :has_seeds?, :has_seeds
+
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
+
+
 end
 
 class Apple < Fruit
