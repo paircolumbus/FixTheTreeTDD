@@ -101,8 +101,15 @@ describe Tree do
 end
 
 describe Fruit do
+
+  let(:fruit){Fruit.new}
+
   it 'should be a Class' do
     expect(described_class.is_a? Class).to be true
+  end
+
+  it 'should have seeds' do
+    expect(fruit.has_seeds?).to be true
   end
 end
 
