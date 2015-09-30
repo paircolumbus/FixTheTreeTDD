@@ -123,6 +123,11 @@ describe Apple do
     expect(described_class.is_a? Class).to be true
   end
 
+  it 'should be an Apple and a Fruit' do
+    expect(apple.is_a? Apple).to be true
+    expect(apple.is_a? Fruit).to be true
+  end
+
   it 'should have attributes initialized' do
     expect(apple.color).to eq(expectedColor)
     expect(apple.diameter).to eq(expectedDiameter)
