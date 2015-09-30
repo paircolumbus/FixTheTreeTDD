@@ -38,7 +38,7 @@ describe Tree do
     it " is alive and growing" do
       prev_height = 0
       prev_age = 0
-      4.times{
+      (Tree::MATURE_YEAR - 1).times{
         tree.age!
         expect(tree.height).to  be > prev_height
         expect(tree.age).to  be > prev_age
@@ -73,7 +73,7 @@ describe Tree do
 
   context " when mature and producing apples" do
     before {
-      5.times{tree.age!}
+      (Tree::MATURE_YEAR).times{tree.age!}
     }
 
     it "has some apples" do
@@ -84,7 +84,7 @@ describe Tree do
 
   context "tree dies " do
     before {
-      201.times{tree.age!}
+      (Tree::DEATH_YEAR + 1).times{tree.age!}
     }
 
     it "has some apples" do

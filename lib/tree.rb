@@ -2,6 +2,10 @@ class NoApplesError < StandardError; end
 
 class Tree
   attr_reader :height, :age, :apples, :alive
+  MATURE_YEAR = 5
+  DEATH_YEAR = 200
+  MAX_FRUIT = 30
+  MAX_DIAMETER = 5
 
   def initialize
     @height = 0
@@ -13,26 +17,28 @@ class Tree
   def age!
     @age += 1
     @height += 1
-    if(age >= 5)
+    if(age >= MATURE_YEAR)
       add_apples
     end
-    if(age >= 200)
+    if(age >= DEATH_YEAR)
       @alive = false
     end
   end
 
+
   def add_apples
-    @apples += rand(30) + 1
+    @apples += rand(MAX_FRUIT) + 1
   end
 
   def any_apples?
     @apples > 0
   end
 
+
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
     @apples -= 1
-    Apple.new((rand(2)%2 == 0)?'red':'yellow', rand(5) + 1)
+    Apple.new((rand(2)%2 == 0)?'red':'yellow', rand(MAX_DIAMETER) + 1)
   end
 
   def dead?
