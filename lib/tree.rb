@@ -11,8 +11,14 @@ class Tree
   end
 
   def age!
-    @age+= 1
+    @age += 1
     @height += 1
+    if(age >= 5)
+      add_apples
+    end
+    if(age >= 200)
+      @alive = false
+    end
   end
 
   def add_apples
