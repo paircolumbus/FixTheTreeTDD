@@ -36,11 +36,11 @@ describe Tree do
   context "when aging first years" do
 
     before {
-      4 * tree.age!
+      4.times{tree.age!}
     }
 
     it "increases its height" do
-      expect(tree.height).to be > 0
+      expect(tree.height).to  be > 0
     end
 
     it "gets older" do
@@ -78,7 +78,7 @@ describe Tree do
 
   context "tree gets apples each year starting at age 5" do
     before {
-      5 * tree.age!
+      5.times{tree.age!}
     }
 
     it "has some apples" do
@@ -87,7 +87,16 @@ describe Tree do
 
   end
 
+  context "tree dies at 200 years" do
+    before {
+      201.times{tree.age!}
+    }
 
+    it "has some apples" do
+      expect(tree.dead?).to be true
+    end
+
+  end
 
 end
 
