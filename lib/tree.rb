@@ -18,15 +18,15 @@ class Tree
   end
 
   def add_apples
-    if @age >= 3
-      rand(@age / 2...@age).times do
+    if age >= 3
+      rand(age / 2...age).times do
         @apples.push(Apple.new('red', rand(MAXIMUM_FRUIT_DIAMETER)))
       end
     end
   end
 
   def any_apples?
-    @apples.length > 0
+    @apples.any?
   end
 
   def pick_an_apple!
@@ -35,7 +35,7 @@ class Tree
   end
 
   def dead?
-    @age >= MAXIMUM_AGE
+    age >= MAXIMUM_AGE
   end
 end
 
