@@ -19,10 +19,14 @@ class Tree
 
   def add_apples
     if age >= 3
-      rand(age / 2...age).times do
+      grow_n_apples.times do
         @apples.push(Apple.new('red', rand(MAXIMUM_FRUIT_DIAMETER)))
       end
     end
+  end
+
+  def grow_n_apples
+    rand(age / 2...age)
   end
 
   def any_apples?
