@@ -8,6 +8,12 @@ describe Tree do
     expect(described_class.is_a? Class).to be true
   end
 
+  it 'should grow as it ages' do
+    initial_height = apple_face.height
+    apple_face.age!
+    expect(apple_face.height).to be > initial_height
+  end
+
   describe 'age!' do
     it 'should increment the age of the Tree by 1' do
       apple_face.age!
