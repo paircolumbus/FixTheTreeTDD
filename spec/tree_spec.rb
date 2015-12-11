@@ -63,6 +63,11 @@ describe Tree do
         apple_face.pick_an_apple!
         expect(apple_face.apples.size).to eq(initial_apples - 1)
       end
+
+      it 'returns an Apple object' do
+        apple_face.add_apples
+        expect(apple_face.pick_an_apple!).to be_instance_of(Apple)
+      end
     end
 
     context 'when there are no apples' do
