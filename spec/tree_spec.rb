@@ -22,13 +22,17 @@ describe Tree do
   end
   
   describe '#add_apples?' do
-    it 'should return true when the tree is 5 years or older' do
-      5.times {apple_face.age!}
-      expect(apple_face.add_apples?).to be true
+    context 'when the tree is old enough to fruit' do
+      it 'should return true' do
+        5.times {apple_face.age!}
+        expect(apple_face.add_apples?).to be true
+      end
     end
 
-    it 'should return false when the tree is too young to produce fruit' do
-      expect(apple_face.add_apples?).to be false
+    context 'when the tree is too young to fruit' do
+      it 'should return false' do
+        expect(apple_face.add_apples?).to be false
+      end
     end
   end
 
