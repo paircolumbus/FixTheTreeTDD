@@ -94,7 +94,7 @@ def tree_data
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{(tree.height/12).to_i} feet"
-    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter.round(2)} inches"
     puts ""
 
     # Ages the tree another year
