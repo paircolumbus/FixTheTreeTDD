@@ -26,6 +26,12 @@ describe Tree do
     end
   end
 
+  describe 'any_apples?' do
+    it 'returns false if there are no apples' do
+      expect(apple_face.any_apples?).to be false
+    end
+  end
+
 
 end
 
