@@ -31,12 +31,13 @@ class Tree
 end
 
 class AppleTree < Tree
-  
+  attr_accessor :lifetime_apples
   @@colors = ['speckled green', 'yellow', 'rosy', 'bright red']
 
   def initialize
     super
     @apples = []
+    @lifetime_apples = 0
   end
 
   def age!
@@ -88,8 +89,6 @@ end
 
 def tree_data
   tree = AppleTree.new
-  lifetime_apples = 0 
-
   tree.age! until tree.any_apples?
 
   puts "Tree is #{tree.age} years old and #{tree.format_height} tall"
@@ -108,21 +107,24 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = diameter_sum / basket.size
+    num_apples = basket.size
+    avg_diameter = diameter_sum / num_apples
+    tree.lifetime_apples += num_apples
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.format_height}"
-    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter.round(2)} inches"
+    puts "Harvest:     #{num_apples} apples with an average diameter of #{avg_diameter.round(2)} inches"
     puts ""
-
-    lifetime_apples += basket.size
 
     # Ages the tree another year
     tree.age!
+    
   end
 
   puts "Alas, the tree, she is dead!"
-  puts "She died after #{tree.age - 1} years at a height of #{tree.format_height}, with a lifetime production of #{lifetime_apples} apples."
+  puts "She died after #{tree.age - 1} years at a height of #{tree.format_height},\
+ with a lifetime production of #{tree.lifetime_apples} apples."
+
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
