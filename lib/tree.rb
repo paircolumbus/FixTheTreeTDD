@@ -8,6 +8,7 @@ class Tree
     @age = 0
     @apples = 0
     @alive = true
+    @maximum_age = 100
   end
 
   def age!
@@ -25,7 +26,7 @@ class Tree
   end
 
   def dead?
-    @age > 100
+    @age > @maximum_age
   end
 end
 
