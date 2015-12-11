@@ -93,7 +93,7 @@ def tree_data
     avg_diameter = diameter_sum / basket.size
 
     puts "Year #{tree.age} Report"
-    puts "Tree height: #{(tree.height/12).to_i} feet"
+    puts "Tree height: #{(tree.height/12).to_i} feet #{(tree.height%12).to_i} inches"
     puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter.round(2)} inches"
     puts ""
 
