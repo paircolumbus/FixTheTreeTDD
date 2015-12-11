@@ -17,12 +17,12 @@ describe Tree do
 
   describe 'dead?' do
     it 'should return false for trees that are under the maximum age (100 years)' do
-      expect(apple_face.dead?).to be_false
+      expect(apple_face.dead?).to be false
     end
 
     it 'should return true for trees that have passed the maximum age (100 years)' do
-      100.times {apple_face.age!}
-      expect(apple_face.dead?).to be_true
+      101.times {apple_face.age!}
+      expect(apple_face.dead?).to be true
     end
   end
 

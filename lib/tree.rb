@@ -25,6 +25,7 @@ class Tree
   end
 
   def dead?
+    @age > 100
   end
 end
 
