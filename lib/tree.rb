@@ -19,6 +19,7 @@ class Tree
   end
 
   def any_apples?
+    false
   end
 
   def pick_an_apple!
