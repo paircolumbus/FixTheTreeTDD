@@ -50,7 +50,7 @@ class Tree
   end
 
   def format_height
-    "height: #{(@height/12).to_i} feet and #{(@height%12).to_i} inches"
+    "#{(@height/12).to_i} feet and #{(@height%12).to_i} inches"
   end
 end
 
@@ -79,7 +79,7 @@ def tree_data
 
   tree.age! until tree.any_apples?
 
-  puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
+  puts "Tree is #{tree.age} years old and #{tree.format_height} tall"
 
   until tree.dead?
     basket = []
