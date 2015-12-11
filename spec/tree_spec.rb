@@ -14,6 +14,13 @@ describe Tree do
       expect(apple_face.age).to eq(1)
     end
   end
+  
+  describe 'add_apples?' do
+    it 'should return true when the tree is 5 years or older' do
+      5.times {apple_face.age!}
+      expect(apple_face.add_apples?).to be true
+    end
+  end
 
   describe 'add_apples' do
     it 'should add apples when called' do
