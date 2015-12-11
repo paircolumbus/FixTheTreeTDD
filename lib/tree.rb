@@ -3,7 +3,7 @@ class NoApplesError < StandardError; end
 
 class Tree
   attr_reader :height, :age, :apples, :alive
-  
+
   def initialize
     @height = 0
     @age = 0
@@ -118,7 +118,7 @@ def tree_data
 
     # Ages the tree another year
     tree.age!
-    
+
   end
 
   puts "Alas, the tree, she is dead!"

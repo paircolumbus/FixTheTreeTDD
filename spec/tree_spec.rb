@@ -3,7 +3,7 @@ require 'tree'
 
 describe Tree do
   let(:tree_face) {Tree.new}
-  
+
   it 'grows as it ages' do
     initial_height = tree_face.height
     tree_face.age!
@@ -30,7 +30,7 @@ describe Tree do
         expect(tree_face.dead?).to be false
       end
     end
-    
+
     context 'when tree age is over maximum age' do
       it 'returns true' do
         200.times {tree_face.age!}
@@ -46,7 +46,7 @@ describe AppleTree do
   it 'is a Tree subclass' do
     expect(described_class.ancestors).to include Tree
   end
-  
+
   describe '#add_apples?' do
     context 'when the tree is old enough to fruit' do
       it 'returns true' do
@@ -69,7 +69,7 @@ describe AppleTree do
       expect(apple_face.apples).not_to be_empty
     end
   end
-  
+
   describe '#any_apples?' do
     it 'returns false if there are no apples' do
       expect(apple_face.any_apples?).to be false
