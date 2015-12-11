@@ -15,8 +15,13 @@ class Tree
 
   def age!
     @age += 1
+    grow!
   end
-  
+
+  def grow!
+    @height += (0.3 + rand) * 6
+  end
+
   def add_apples?
     @age >= 5
   end
