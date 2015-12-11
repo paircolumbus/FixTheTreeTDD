@@ -9,7 +9,7 @@ class Tree
     @age = 0
     @apples = []
     @alive = true
-    @maximum_age = 100 * (0.5 + rand)
+    @maximum_age = 125 * (0.5 + rand)
     
   end
 
