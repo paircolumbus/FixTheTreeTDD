@@ -16,6 +16,7 @@ class Tree
   end
   
   def add_apples?
+    @age >= 5
   end
 
   def add_apples
