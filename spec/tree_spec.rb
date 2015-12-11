@@ -30,7 +30,7 @@ describe Tree do
     it 'should add apples when called' do
       initial_apples = apple_face.apples
       apple_face.add_apples
-      expect(apple_face.apples).to be > initial_apples
+      expect(apple_face.apples).not_to be_empty
     end
   end
   
@@ -48,9 +48,9 @@ describe Tree do
   describe 'pick_an_apple!' do
     it 'removes 1 apple if there are apples' do
       apple_face.add_apples
-      initial_apples = apple_face.apples
+      initial_apples = apple_face.apples.size
       apple_face.pick_an_apple!
-      expect(apple_face.apples).to eq(initial_apples - 1)
+      expect(apple_face.apples.size).to eq(initial_apples - 1)
     end
   end
 
@@ -73,6 +73,9 @@ end
 describe Apple do
   it 'should be a subclass of Fruit' do
     expect(described_class.ancestors).to include Fruit
+  end
+
+  it 'should generate apples with random diameter and color' do
   end
 end
 

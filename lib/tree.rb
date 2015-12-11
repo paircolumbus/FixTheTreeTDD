@@ -36,7 +36,7 @@ class Tree
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
-    @apples -= 1
+    @apples.pop
   end
 
   def dead?
