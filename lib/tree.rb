@@ -48,6 +48,10 @@ class Tree
   def dead?
     @age > @maximum_age
   end
+
+  def format_height
+    "height: #{(@height/12).to_i} feet and #{(@height%12).to_i} inches"
+  end
 end
 
 class Fruit
@@ -71,6 +75,7 @@ end
 
 def tree_data
   tree = Tree.new
+  lifetime_apples = 0 
 
   tree.age! until tree.any_apples?
 
@@ -93,15 +98,18 @@ def tree_data
     avg_diameter = diameter_sum / basket.size
 
     puts "Year #{tree.age} Report"
-    puts "Tree height: #{(tree.height/12).to_i} feet #{(tree.height%12).to_i} inches"
+    puts "Tree height: #{tree.format_height}"
     puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter.round(2)} inches"
     puts ""
+
+    lifetime_apples += basket.size
 
     # Ages the tree another year
     tree.age!
   end
 
   puts "Alas, the tree, she is dead!"
+  puts "She died after #{tree.age - 1} years at a height of #{tree.format_height}, with a lifetime production of #{lifetime_apples} apples."
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
