@@ -56,11 +56,19 @@ describe Tree do
   end
 
   describe '#pick_an_apple!' do
-    it 'removes 1 apple if there are apples' do
-      apple_face.add_apples
-      initial_apples = apple_face.apples.size
-      apple_face.pick_an_apple!
-      expect(apple_face.apples.size).to eq(initial_apples - 1)
+    context 'when there are apples' do
+      it 'removes 1 apple from the tree' do
+        apple_face.add_apples
+        initial_apples = apple_face.apples.size
+        apple_face.pick_an_apple!
+        expect(apple_face.apples.size).to eq(initial_apples - 1)
+      end
+    end
+
+    context 'when there are no apples' do
+      it 'raises a NoApplesError' do
+        expect {apple_face.pick_an_apple!}.to raise_error(NoApplesError)
+      end
     end
   end
 
