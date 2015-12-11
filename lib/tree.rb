@@ -20,7 +20,7 @@ class Tree
   end
 
   def add_apples
-    @apples += 1
+    @apples += ((0.5 + rand) * (30 + @age)).to_i
   end
 
   def any_apples?
