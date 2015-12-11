@@ -4,6 +4,10 @@ class Tree
   attr_reader :height, :age, :apples, :alive
 
   def initialize
+    @height = 0
+    @age = 0
+    @apples = 0
+    @alive = true
   end
 
   def age!
