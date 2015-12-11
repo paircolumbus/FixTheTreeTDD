@@ -45,6 +45,15 @@ describe Tree do
     end
   end
 
+  describe 'pick_an_apple!' do
+    it 'removes 1 apple if there are apples' do
+      apple_face.add_apples
+      initial_apples = apple_face.apples
+      apple_face.pick_an_apple!
+      expect(apple_face.apples).to eq(initial_apples - 1)
+    end
+  end
+
   describe 'dead?' do
     it 'should return false for trees that are under the maximum age (100 years)' do
       expect(apple_face.dead?).to be false
