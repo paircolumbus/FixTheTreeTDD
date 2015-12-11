@@ -24,7 +24,7 @@ class Tree
   end
 
   def any_apples?
-    false
+    @apples > 0
   end
 
   def pick_an_apple!
