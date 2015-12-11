@@ -6,7 +6,7 @@ class Tree
   def initialize
     @height = 0
     @age = 0
-    @apples = 0
+    @apples = []
     @alive = true
     @maximum_age = 100
   end
