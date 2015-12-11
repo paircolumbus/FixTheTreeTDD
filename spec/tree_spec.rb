@@ -15,6 +15,20 @@ describe Tree do
     end
   end
 
+  describe 'add_apples' do
+    it 'should add apples when called' do
+      initial_apples = apple_face.apples
+      apple_face.add_apples
+      expect(apple_face.apples).to be > initial_apples
+    end
+  end
+  
+  describe 'any_apples?' do
+    it 'returns false if there are no apples' do
+      expect(apple_face.any_apples?).to be false
+    end
+  end
+
   describe 'dead?' do
     it 'should return false for trees that are under the maximum age (100 years)' do
       expect(apple_face.dead?).to be false
@@ -25,13 +39,6 @@ describe Tree do
       expect(apple_face.dead?).to be true
     end
   end
-
-  describe 'any_apples?' do
-    it 'returns false if there are no apples' do
-      expect(apple_face.any_apples?).to be false
-    end
-  end
-
 
 end
 

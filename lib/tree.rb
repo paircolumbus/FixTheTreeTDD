@@ -16,6 +16,7 @@ class Tree
   end
 
   def add_apples
+    @apples += 1
   end
 
   def any_apples?
