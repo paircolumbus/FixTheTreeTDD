@@ -16,6 +16,28 @@ describe Tree do
       expect(tree_face.age).to eq(1)
     end
   end
+
+  describe '#age!' do
+    it 'increments the age of the Tree by 1' do
+      tree_face.age!
+      expect(tree_face.age).to eq(1)
+    end
+  end
+
+  describe '#dead?' do
+    context 'when tree age is under maximum age' do
+      it 'returns false' do
+        expect(tree_face.dead?).to be false
+      end
+    end
+    
+    context 'when tree age is over maximum age' do
+      it 'returns true' do
+        200.times {tree_face.age!}
+        expect(tree_face.dead?).to be true
+      end
+    end
+  end
 end
 
 describe AppleTree do
@@ -23,14 +45,6 @@ describe AppleTree do
 
   it 'is a Tree' do
     expect(described_class.ancestors).to include Tree
-  end
-
-  
-  describe '#age!' do
-    it 'increments the age of the Tree by 1' do
-      apple_face.age!
-      expect(apple_face.age).to eq(1)
-    end
   end
   
   describe '#add_apples?' do
@@ -88,22 +102,6 @@ describe AppleTree do
       end
     end
   end
-
-  describe '#dead?' do
-    context 'when tree age is under maximum age' do
-      it 'returns false' do
-        expect(apple_face.dead?).to be false
-      end
-    end
-    
-    context 'when tree age is over maximum age' do
-      it 'returns true' do
-        200.times {apple_face.age!}
-        expect(apple_face.dead?).to be true
-      end
-    end
-  end
-
 end
 
 describe 'Fruit' do
