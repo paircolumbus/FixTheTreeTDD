@@ -1,26 +1,47 @@
 class NoApplesError < StandardError; end
 
+
 class Tree
   attr_reader :height, :age, :apples, :alive
-  @@colors = ['speckled green', 'yellow', 'rosy', 'bright red']
-
+  
   def initialize
     @height = 0
     @age = 0
-    @apples = []
     @alive = true
     @maximum_age = 125 * (0.5 + rand)
-    
   end
 
   def age!
     @age += 1
     grow!
-    add_apples if add_apples?
   end
 
   def grow!
     @height += (0.3 + rand) * 6
+  end
+
+  def dead?
+    @age > @maximum_age
+  end
+
+  def format_height
+    "#{(@height/12).to_i} feet and #{(@height%12).to_i} inches"
+  end
+
+end
+
+class AppleTree < Tree
+  
+  @@colors = ['speckled green', 'yellow', 'rosy', 'bright red']
+
+  def initialize
+    super
+    @apples = []
+  end
+
+  def age!
+    super
+    add_apples if add_apples?
   end
 
   def add_apples?
@@ -44,14 +65,6 @@ class Tree
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
     @apples.pop
   end
-
-  def dead?
-    @age > @maximum_age
-  end
-
-  def format_height
-    "#{(@height/12).to_i} feet and #{(@height%12).to_i} inches"
-  end
 end
 
 class Fruit
@@ -74,7 +87,7 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
   lifetime_apples = 0 
 
   tree.age! until tree.any_apples?

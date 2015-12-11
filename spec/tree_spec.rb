@@ -2,18 +2,30 @@ require 'rspec'
 require 'tree'
 
 describe Tree do
-  let(:apple_face) {Tree.new}
-
-  it 'is a Class' do
-    expect(described_class.is_a? Class).to be true
-  end
-
+  let(:tree_face) {Tree.new}
+  
   it 'grows as it ages' do
-    initial_height = apple_face.height
-    apple_face.age!
-    expect(apple_face.height).to be > initial_height
+    initial_height = tree_face.height
+    tree_face.age!
+    expect(tree_face.height).to be > initial_height
   end
 
+  describe '#age!' do
+    it 'increments the age of the Tree by 1' do
+      tree_face.age!
+      expect(tree_face.age).to eq(1)
+    end
+  end
+end
+
+describe AppleTree do
+  let(:apple_face) {AppleTree.new}
+
+  it 'is a Tree' do
+    expect(described_class.ancestors).to include Tree
+  end
+
+  
   describe '#age!' do
     it 'increments the age of the Tree by 1' do
       apple_face.age!
