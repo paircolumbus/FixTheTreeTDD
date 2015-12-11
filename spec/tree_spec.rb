@@ -20,6 +20,10 @@ describe Tree do
       5.times {apple_face.age!}
       expect(apple_face.add_apples?).to be true
     end
+
+    it 'should return false when the tree is too young to produce fruit' do
+      expect(apple_face.add_apples?).to be false
+    end
   end
 
   describe 'add_apples' do
