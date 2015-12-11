@@ -2,6 +2,7 @@ class NoApplesError < StandardError; end
 
 class Tree
   attr_reader :height, :age, :apples, :alive
+  @@colors = ['speckled green', 'yellow', 'rosy', 'bright red']
 
   def initialize
     @height = 0
@@ -9,6 +10,7 @@ class Tree
     @apples = []
     @alive = true
     @maximum_age = 100
+    
   end
 
   def age!
@@ -20,11 +22,16 @@ class Tree
   end
 
   def add_apples
-    @apples += ((0.5 + rand) * (30 + @age)).to_i
+    number_of_apples = ((0.5 + rand) * (30 + @age)).to_i
+    number_of_apples.times do
+      color = @@colors.sample
+      diameter = (0.5 + rand) * (3) # inches
+      @apples << Apple.new(color, diameter)
+    end
   end
 
   def any_apples?
-    @apples > 0
+    !@apples.empty?
   end
 
   def pick_an_apple!
@@ -44,7 +51,7 @@ class Fruit
 end
 
 class Apple < Fruit
-  #attr_reader #what should go here 
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
   end
