@@ -77,11 +77,10 @@ describe 'Fruit' do
 end
 
 describe Apple do
+  let(:test_apple) {Apple.new('')}
+
   it 'should be a subclass of Fruit' do
     expect(described_class.ancestors).to include Fruit
-  end
-
-  it 'should generate apples with random diameter and color' do
   end
 end
 

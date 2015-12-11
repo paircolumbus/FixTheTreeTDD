@@ -16,6 +16,7 @@ class Tree
   def age!
     @age += 1
     grow!
+    add_apples if add_apples?
   end
 
   def grow!
@@ -30,7 +31,7 @@ class Tree
     number_of_apples = ((0.5 + rand) * (30 + @age)).to_i
     number_of_apples.times do
       color = @@colors.sample
-      diameter = (0.5 + rand) * (3) # inches
+      diameter = (0.5 + rand) * (2 + 2 * rand) # inches
       @apples << Apple.new(color, diameter)
     end
   end
@@ -59,6 +60,8 @@ class Apple < Fruit
   attr_reader :color, :diameter
 
   def initialize(color, diameter)
+    @color = color
+    @diameter = diameter
   end
 end
 
@@ -87,10 +90,10 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.size
 
     puts "Year #{tree.age} Report"
-    puts "Tree height: #{tree.height} feet"
+    puts "Tree height: #{(tree.height/12).to_i} feet"
     puts "Harvest:     #{basket.size} oranges with an average diameter of #{avg_diameter} inches"
     puts ""
 
@@ -102,4 +105,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+tree_data
