@@ -43,7 +43,7 @@ end
 describe AppleTree do
   let(:apple_face) {AppleTree.new}
 
-  it 'is a Tree' do
+  it 'is a Tree subclass' do
     expect(described_class.ancestors).to include Tree
   end
   
@@ -110,7 +110,7 @@ end
 describe Apple do
   let(:test_apple) {Apple.new('')}
 
-  it 'is a subclass of Fruit' do
+  it 'is a Fruit subclass' do
     expect(described_class.ancestors).to include Fruit
   end
 end
