@@ -1,7 +1,7 @@
 class NoApplesError < StandardError; end
 
-class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+class Tree
+  attr_reader :height, :age, :apples, :alive
 
   def initialize
   end
@@ -29,8 +29,8 @@ class Fruit
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple
+  #attr_reader #what should go here 
 
   def initialize(color, diameter)
   end
