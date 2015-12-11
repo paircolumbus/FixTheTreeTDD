@@ -29,7 +29,7 @@ class Fruit
   end
 end
 
-class Apple
+class Apple < Fruit
   #attr_reader #what should go here 
 
   def initialize(color, diameter)

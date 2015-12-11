@@ -11,7 +11,7 @@ describe 'Fruit' do
 end
 
 describe Apple do
-  it 'should be a kind of Fruit' do
-    expect(described_class.is_a? Fruit).to be true
+  it 'should be a subclass of Fruit' do
+    expect(described_class.ancestors).to include Fruit
   end
 end
