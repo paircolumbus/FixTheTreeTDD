@@ -14,6 +14,19 @@ describe Tree do
       expect(apple_face.age).to eq(1)
     end
   end
+
+  describe 'dead?' do
+    it 'should return false for trees that are under the maximum age (100 years)' do
+      expect(apple_face.dead?).to be_false
+    end
+
+    it 'should return true for trees that have passed the maximum age (100 years)' do
+      100.times {apple_face.age!}
+      expect(apple_face.dead?).to be_true
+    end
+  end
+
+
 end
 
 describe 'Fruit' do

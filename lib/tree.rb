@@ -11,6 +11,7 @@ class Tree
   end
 
   def age!
+    @age += 1
   end
 
   def add_apples
