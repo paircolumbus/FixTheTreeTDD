@@ -49,13 +49,17 @@ class AppleTree < Tree
     @age >= 5
   end
 
-  def add_apples
+  def calculate_apple_growth
     number_of_apples = ((0.5 + rand) * (30 + @age)).to_i
+  end
+
+  def add_apples(number_of_apples = calculate_apple_growth)
     number_of_apples.times do
       color = @@colors.sample
       diameter = (0.5 + rand) * (2 + 2 * rand) # inches
       @apples << Apple.new(color, diameter)
     end
+
   end
 
   def any_apples?
