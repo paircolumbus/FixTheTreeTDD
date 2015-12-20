@@ -23,9 +23,9 @@ class Tree
   end
   
   def add_apples
-      if @age <=2
+      if @age >= 3
           rand(@age / 2...@age).times do
-              @apples.push(Apple.new('green', rand(MAX_DIAMETER)))
+              @apples.push(Apple.new('green' || 'red', rand(MAX_DIAMETER)))
             end
           end
       end
@@ -88,7 +88,7 @@ def tree_data
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} oranges with an average diameter of #{avg_diameter} inches"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches,"
     puts ""
 
     # Ages the tree another year
