@@ -1,38 +1,63 @@
 class NoApplesError < StandardError; end
 
 class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+
+  attr_reader :height, :age, :apples, :alive
 
   def initialize
+    @age = 0
+    @height = 0
+    @apples = []
+    @alive = true
   end
 
   def age!
+    if alive
+      @age = @age + 1
+      @height = @height + 1
+      self.add_apples
+      if age >= 25
+        @alive = false
+      end
+    end
+    @age
   end
 
   def add_apples
+    rand(1..5).times do
+      @apples.push(Apple.new('red', rand(1..5)))
+    end
   end
 
   def any_apples?
+    @apples.count > 0
   end
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    @apples.shift
   end
 
   def dead?
+    !@alive
   end
 end
 
 class Fruit
+  attr_reader :has_seeds
+
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
 
-  def initialize(color, diameter)
+  def initialize(color = 'red', diameter = 5)
+    super()
+    @color = color
+    @diameter = diameter
   end
 end
 
@@ -41,7 +66,7 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
   tree.age! until tree.any_apples?
 
@@ -61,11 +86,11 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.count
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} oranges with an average diameter of #{avg_diameter} inches"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
     puts ""
 
     # Ages the tree another year
@@ -76,4 +101,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+tree_data
