@@ -22,21 +22,42 @@ class Tree
       @height += (0.4 + rand) * 5 unless height >= 50 #ft
   end
   
-  def add_apples
-      if @age >= 3
-          rand(@age / 2...@age).times do
-              @apples.push(Apple.new('green' || 'red', rand(MAX_DIAMETER)))
-            end
-          end
-      end
-  
-def dead?
+  def dead?
       @age > MAX_AGE
   end
   
-  def any_apples?
-      @apples.length > 0
+  def add_apples
+      rand(@age / 2...@age).times do
+          @apples.push(Apple.new('green' || 'red', rand(MAX_DIAMETER)))
+      end
   end
+
+def any_apples?
+    @apples.length > 0
+end
+end
+
+
+
+class AppleTree < Tree
+    attr_accessor :all_apples
+    @@colors = ['green', 'red']
+
+  def initialize
+      super
+      @apples = []
+      @all_apples = 0
+    end
+  def age!
+      super
+      add_apples if add_apples?
+    end
+ 
+  def add_apples?
+      @age >= 3
+    end
+      
+
   
   def pick_an_apple!
       raise NoApplesError, "This tree has no apples" unless self.any_apples?
@@ -45,7 +66,7 @@ def dead?
 end
 
 class Fruit
-  def initialize
+  def seedy
     has_seeds = true
   end
 end
@@ -63,7 +84,7 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
   tree.age! until tree.any_apples?
 
@@ -102,4 +123,4 @@ end
 
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-tree_data
+#tree_data
