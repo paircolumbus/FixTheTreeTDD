@@ -35,7 +35,8 @@ describe 'Tree' do
 
   it 'should increase age with age! method' do
     expect(@tree.age).to eq 0
-    expect(@tree.age!).to eq 1
+    @tree.age!
+    expect(@tree.age).to eq 1
   end
 
   it 'should die after 25 years' do

@@ -20,7 +20,6 @@ class AppleTree
         @alive = false
       end
     end
-    @age
   end
 
   def add_apples
@@ -30,7 +29,7 @@ class AppleTree
   end
 
   def any_apples?
-    @apples.count > 0
+    @apples.any?
   end
 
   def pick_an_apple!
