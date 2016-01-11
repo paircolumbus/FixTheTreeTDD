@@ -1,18 +1,24 @@
 class NoApplesError < StandardError; end
 
 class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_reader :height
+  attr_accessor :age
+  attr_accessor :apples
+  attr_reader :alive
 
   def initialize
   end
 
   def age!
+    @age += 1
   end
 
   def add_apples
   end
 
   def any_apples?
+    if @apples >= 1 then true else false end
+    end
   end
 
   def pick_an_apple!
@@ -20,6 +26,7 @@ class AppleTree
   end
 
   def dead?
+    !@alive
   end
 end
 
@@ -29,8 +36,8 @@ class Fruit
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :has_seeds
 
   def initialize(color, diameter)
   end
@@ -61,7 +68,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum .# It's up to you to calculate the average diameter for this harvest.
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
