@@ -41,20 +41,22 @@ describe Tree do
   end
 
   it 'should take 1 apple away if an apple is picked' do
-  	some_tree.apples = 5
+  	5.times{some_tree.age!}
+    some_apples = some_tree.apples
   	some_tree.pick_an_apple!
-  	expect(some_tree.apples).to eq 4
+  	expect(some_tree.apples).to be < some_apples
   end
 
   it 'should be dead if over 100' do
-  	some_tree.age = 101
+  	101.times{some_tree.age!}
   	expect(some_tree.dead?).to eq true
   end
 
 end
 
 describe 'Fruit' do
-	let(:some_fruit) {Fruit.new}
+	
+  let(:some_fruit) {Fruit.new}
 
 	it 'should have seeds' do
 		expect(some_fruit.has_seeds).to eq true
@@ -63,7 +65,8 @@ describe 'Fruit' do
 end
 
 describe Apple do
-	let(:some_apple) {Apple.new("Red", rand)}
+
+  let(:some_apple) {Apple.new("Red", rand)}
 
 	it 'should be a subclass of Fruit' do
 		expect(described_class.ancestors).to include Fruit
