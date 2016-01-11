@@ -42,13 +42,13 @@ class AppleTree
 end
 
 class Fruit
+  attr_reader :has_seeds
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
 class Apple < Fruit
-  attr_reader :has_seeds
   attr_accessor :color, :diameter
   def initialize(color = "red", diameter = 2.5)
     super()
@@ -96,4 +96,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
- tree_data
+ #tree_data
