@@ -1,28 +1,39 @@
 class NoApplesError < StandardError; end
 
 class AppleTree
-  attr_reader :height
-  attr_accessor :age
-  attr_accessor :apples
-  attr_reader :alive
+  attr_accessor :height, :age, :apples, :alive
 
   def initialize
+    @height = 1
+    @age = 0
+    @apples = []
+    @alive = true
   end
 
   def age!
     @age += 1
+    if @age >= 100 then @alive = false end
+    if @alive == true
+      if @height < 30 then @height += 1 end
+      if @age >= 5 then self.add_apples end
+    end    
   end
 
   def add_apples
+    apples_produced = rand(100..200)
+    for i in 0..apples_produced
+      @apples.push(Apple.new("red", rand(1.5..3.5)))
+    end
   end
 
   def any_apples?
-    if @apples >= 1 then true else false end
-    end
+    if @apples.count >= 1 then true else false end
   end
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
+     apple = @apples.shift
+     apple
   end
 
   def dead?
@@ -38,8 +49,11 @@ end
 
 class Apple < Fruit
   attr_reader :has_seeds
-
-  def initialize(color, diameter)
+  attr_accessor :color, :diameter
+  def initialize(color = "red", diameter = 2.5)
+    super()
+    @color = color
+    @diameter = diameter
   end
 end
 
@@ -48,7 +62,7 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
   tree.age! until tree.any_apples?
 
@@ -56,7 +70,6 @@ def tree_data
 
   until tree.dead?
     basket = []
-
     # It places the apple in the basket
     while tree.any_apples?
       basket << tree.pick_an_apple!
@@ -68,7 +81,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = diameter_sum .# It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.count# It's up to you to calculate the average diameter for this harvest.
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
@@ -83,4 +96,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+ tree_data
