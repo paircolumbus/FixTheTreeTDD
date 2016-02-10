@@ -1,14 +1,7 @@
 class NoApplesError < StandardError; end
 
-class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
-
-  def initialize
-  end
-
-  def age!
-  end
-
+module AppleTree
+  
   def add_apples
   end
 
@@ -18,9 +11,24 @@ class AppleTree
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
   end
+  
+end
+
+class Tree
+  include AppleTree
+
+  attr_accessor#fill_in :height, :age, :apples, :alive
+
+  def initialize
+  end
+
+  def age!
+  end
 
   def dead?
   end
+
+
 end
 
 class Fruit
@@ -29,8 +37,8 @@ class Fruit
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple 
+  #attr_reader #what should go here 
 
   def initialize(color, diameter)
   end
