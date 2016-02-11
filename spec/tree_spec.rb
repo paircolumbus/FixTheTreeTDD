@@ -3,8 +3,18 @@ require 'tree'
 
 describe 'Tree' do
 
+  before :each do
+    @tree = Tree.new
+  end
+
   it 'should be a Class' do
     expect(Tree).to be_a Class
+  end
+
+  describe "#new" do
+    it "returns a new Tree object" do
+      expect(@tree).to be_an_instance_of(Tree)
+    end
   end
 
 end
