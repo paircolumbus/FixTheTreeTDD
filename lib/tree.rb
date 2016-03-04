@@ -4,7 +4,7 @@ module AppleTree
   
   # adds apples when @apples == true, creates an array of 100 - 250 apples, diameter between 3 and 5 
   def add_apples
-    harvest = Array.new(rand(100..250)) { Apple.new }
+    @@harvest = Array.new(rand(100..250)) { Apple.new }
   end
 
   # boolean value, checks if class basket is empty 
