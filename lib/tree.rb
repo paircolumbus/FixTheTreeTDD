@@ -41,7 +41,7 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
   tree.age! until tree.any_apples?
 
