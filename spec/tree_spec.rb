@@ -39,10 +39,9 @@ describe "Tree" do
       expect(@tree.age).to eq(10)
     end
 
-    it "adds apples to the tree when the tree is old enough" do
-      if @tree.age >= 5
-        expect(@tree.apples).to be true
-      end
+    it "adds apples to the tree when the tree is 5 years old" do
+        5.times { @tree.age! }
+        expect(@tree.apples.size).to_not be 0
     end
 
     it "grows the tree 1 foot per year" do
@@ -86,20 +85,27 @@ describe "AppleTree" do
   end
 
   describe "#add_apples" do
-    it "creates an array of 100 -250 apple objects, called 'harvest', when @apples == true" do
-      @tree.add_apples
-      expect(@tree.apples).to be_a Array
+    it "populates @apples with 100 -250 valid apple objects when @age >= 5" do
+      5.times { @tree.age! }
+      if @tree.age >= 5
+        expect(100..250).to cover(@tree.apples.size)
+      end
     end
-
-    it "gives the apples in the array a diamter between 3 and 5" do
-    end
-
-    it "gives the apples in the array a color" do
-    end
-
   end
 
+  describe "#any_apples" do
+    it "returns true if @apples array is not empty, otherwise return false" do
+      if @tree.apples.empty? == true
+        expect(@tree.apples.size).to eq(0)
+      end
+    end
+  end
 
+  describe "#pick_an_apple!" do
+    it "should raise an error if there are no apples" do
+      expect { @tree.pick_an_apple! }.to raise_error("This tree has no apples")
+    end
+  end
 
 end
 
@@ -114,8 +120,25 @@ end
 
 describe 'Apple' do
 
+  before :each do
+    @apple = Apple.new("red", (rand(3..5)))
+  end
+  
   it 'should be a Class' do
     expect(Apple).to be_a Class
   end
+
+  it "should be initialized with 2 instance variables" do
+      expect(@apple.instance_variable_defined?(:@color)).to be true
+      expect(@apple.instance_variable_defined?(:@diameter)).to be true
+  end
+
+  it "creates an apple with a diameter between 3 and 5" do
+      expect(3..5).to cover(@apple.diameter)
+    end
+
+    it "gives the apples in the array a color" do
+      expect(@apple.color).to be_a String
+    end
 
 end

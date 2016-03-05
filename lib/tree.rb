@@ -4,16 +4,22 @@ module AppleTree
   
   # adds apples when @apples == true, creates an array of 100 - 250 apples, diameter between 3 and 5 
   def add_apples
-    @@harvest = Array.new(rand(100..250)) { Apple.new }
+    @apples = Array.new(rand(100..250)) { Apple.new("red", (rand(3.0..5.0))) }
   end
 
-  # boolean value, checks if class basket is empty 
+  # boolean value, checks if tree is empty 
   def any_apples?
+    if self.apples.nil? == true || self.apples.empty? == true 
+      false
+    else
+      true
+    end
   end
 
   # removes an apple from apple array which will be added to basket array, if [] is empty?, any_apples? == false, 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    self.apples.pop
   end
   
 end
@@ -27,19 +33,19 @@ class Tree
   def initialize
     @height = 0
     @age = 0
-    @apples = false
+    @apples = nil
     @alive = true
   end
 
   def age!
     @age += 1
     if @age >= 5
-      @apples = true
+      @apples = self.add_apples
     end
 
     @height += 1 unless @height == 30
 
-    if @age >= 150
+    if @age > 150
       @alive = false
     end
   end
@@ -56,21 +62,12 @@ class Tree
 
 end
 
-class Fruit
 
-  # creates new fruit object, used by apple below. grows new tree if seeds.viable?
-  def initialize
-    has_seeds = true
-  end
-
-end
-
-# inherits from fruit
 class Apple 
   attr_reader :color, :diameter 
 
   # creates new apple of a color and diameter, diameter based on age of tree
-  def initialize#(color, diameter)
+  def initialize(color, diameter)
     @color = color
     @diameter = diameter
   end
@@ -102,8 +99,8 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    # avg_diameter = # It's up to you to calculate the average diameter for this harvest.
-
+    avg_diameter = ((basket.map { |apple| apple.diameter }).reduce(:+) / basket.size).to_f.round(2)
+ 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
     puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
@@ -117,9 +114,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
-
-
-tree = Tree.new
-10.times { tree.age! }
-p tree
+tree_data
