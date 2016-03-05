@@ -65,7 +65,7 @@ describe "Tree" do
   describe "#dead?" do
 
     it "evaluates to true when @alive evaluates to false" do
-      150.times { @tree.age! }
+      151.times { @tree.age! }
       expect(@tree.dead?).to be true
     end
 
@@ -77,7 +77,6 @@ describe "AppleTree" do
 
   before :each do
     @tree = Tree.new
-    @tree.add_apples
   end
 
   it "should be a module" do
@@ -93,10 +92,18 @@ describe "AppleTree" do
     end
   end
 
-  describe "#any_apples" do
-    it "returns true if @apples array is not empty, otherwise return false" do
-      if @tree.apples.empty? == true
-        expect(@tree.apples.size).to eq(0)
+  describe "#any_apples?" do
+    it "returns false if the tree is too young and @apples has not been initialized as an array" do
+      if @tree.apples.nil? == true 
+        expect(@tree.apples).to_not be_a Array
+      end
+    end
+  end
+
+  describe "#any_apples?" do
+    it "if @apples is not nil, it is an array" do
+      if @tree.apples != nil
+        expect(@tree.apples).to be_a Array
       end
     end
   end
@@ -105,15 +112,6 @@ describe "AppleTree" do
     it "should raise an error if there are no apples" do
       expect { @tree.pick_an_apple! }.to raise_error("This tree has no apples")
     end
-  end
-
-end
-
-
-describe "Fruit" do
-
-  it 'should be a Class' do
-    expect(Fruit).to be_a Class
   end
 
 end
