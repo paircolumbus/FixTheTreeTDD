@@ -49,17 +49,20 @@ class AppleTree < Tree
 end
 
 class Fruit
+  attr_reader :has_seeds
+
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
 class Apple < Fruit
-  attr_reader :color, :diameter#what should go here 
+  attr_reader :color, :diameter #what should go here 
 
   def initialize(color, diameter)
+    super()
     @color = color
-    @diameter = diameter
+    @diameter = diameter   
   end
 end
 
