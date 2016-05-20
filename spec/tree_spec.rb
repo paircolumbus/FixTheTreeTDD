@@ -1,14 +1,26 @@
 require 'rspec'
 require 'tree'
 
-describe 'Tree' do
+describe AppleTree do
+
+	#delete unless doing other tests on methods
+	before do
+		@appleTree = AppleTree.new
+	end
+
   it 'should be a Class' do
-    expect(described_class.is_a? 'Class').to be_true
+    expect(described_class.is_a? Class).to be true
   end
 end
 
-describe 'Fruit' do
+describe Fruit do
+	it 'should be a Class' do
+		expect(described_class.is_a? Class).to be true
+	end
 end
 
-describe 'Apple' do
+describe Apple do
+	it 'should be a Class' do
+		expect(described_class.is_a? Class).to be true
+	end
 end
