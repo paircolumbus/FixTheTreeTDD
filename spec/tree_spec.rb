@@ -4,7 +4,7 @@ require 'tree'
 describe AppleTree do
 
   before :all do
-	 @appleTree = AppleTree.new
+    @appleTree = AppleTree.new
   end
 
   it 'should be a Class' do
@@ -34,20 +34,20 @@ end
 
 describe Fruit do
   it 'should be a Class' do
-	 expect(described_class.is_a? Class).to be true
+    expect(described_class.is_a? Class).to be true
   end
 end
 
 describe Apple do
   before :all do
-	 @apple = Apple.new('red', 3)
+    @apple = Apple.new('red', 3)
   end
 
   it 'should be a Class' do
-	 expect(described_class.is_a? Class).to be true
+    expect(described_class.is_a? Class).to be true
   end
 
   it 'should have seeds' do
-	 expect(@apple.has_seeds).to be true
+    expect(@apple.has_seeds).to be true
   end
 end
