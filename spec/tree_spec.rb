@@ -60,6 +60,10 @@ describe Apple do
     expect(described_class.is_a? Class).to be_truthy
   end
 
+  it 'should extend Fruit' do
+    expect(described_class.superclass).to eq Fruit
+  end
+
   it 'should be initialized with correct color and diameter' do
     a = Apple.new("red", 4)
     expect(a.color).to eq "red"
