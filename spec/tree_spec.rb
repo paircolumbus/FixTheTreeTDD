@@ -10,7 +10,7 @@ describe Tree do
     it "should live 5 years" do
       expect(tree.dead?).to eq false
 
-      tree_data.length.times { tree.age! }
+      (tree_data.length + 1).times { tree.age! }
       expect(tree.dead?).to eq true
     end
 
