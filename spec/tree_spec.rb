@@ -24,10 +24,36 @@ describe Tree do
 end
 
 describe AppleTree do
-  let(:apple_tree) { AppleTree.new }
+  let(:tree_data) do
+    [
+      AppleTreeData.new(1, 0),
+      AppleTreeData.new(13, 0),
+      AppleTreeData.new(43, 0),
+      AppleTreeData.new(52, 5),
+      AppleTreeData.new(71, 28),
+      AppleTreeData.new(83, 142),
+    ]
+  end
+  let(:apple_tree) { AppleTree.new(tree_data) }
 
   it 'should be a Tree' do
     expect(apple_tree.is_a? Tree).to eq true
+  end
+
+  it 'should bear fruit after aging' do
+    3.times { apple_tree.age! }
+    expect(apple_tree.any_apples?).to eq true
+    expect(apple_tree.apples).to eq 5
+
+    apple_tree.age!
+
+    expect(apple_tree.any_apples?).to eq true
+    expect(apple_tree.apples).to eq 28
+
+    apple_tree.age!
+
+    expect(apple_tree.any_apples?).to eq true
+    expect(apple_tree.apples).to eq 142
   end
 end
 
