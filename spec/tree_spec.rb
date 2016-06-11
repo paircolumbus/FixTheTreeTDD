@@ -3,7 +3,7 @@ require 'tree'
 
 describe Tree do
   context "Tree with history" do
-    let(:tree_data) { [1, 12, 37, 49, 65].map { TreeData.new } }
+    let(:tree_details) { [1, 2, 4, 6, 7].map { TreeData.new } }
     let(:history) { TreeHistory.new(tree_data) }
     let(:tree) { Tree.new(history) }
 
@@ -24,7 +24,7 @@ describe Tree do
 end
 
 describe AppleTree do
-  let(:tree_data) do
+  let(:tree_details) do
     [
       AppleTreeData.new(1, 0),
       AppleTreeData.new(13, 0),
