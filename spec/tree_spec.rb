@@ -3,20 +3,20 @@ require 'tree'
 
 describe Tree do
   context "Tree with history" do
-    let(:tree_heights) { [1, 12, 37, 49, 65] }
-    let(:history) { TreeHistory.new(tree_heights) }
+    let(:tree_data) { [1, 12, 37, 49, 65].map { TreeData.new } }
+    let(:history) { TreeHistory.new(tree_data) }
     let(:tree) { Tree.new(history) }
 
     it "should live 5 years" do
       expect(tree.dead?).to eq false
 
-      5.times { tree.age! }
+      tree_data.length.times { tree.age! }
       expect(tree.dead?).to eq true
     end
 
     it "should change height each year" do
-      tree_heights.each do |height|
-        expect(tree.height).to eq height
+      tree_data.each do |year|
+        expect(tree.height).to eq year.height
         tree.age!
       end
     end
