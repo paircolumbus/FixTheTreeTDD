@@ -1,7 +1,7 @@
 class NoApplesError < StandardError; end
 
 class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_reader :height, :age, :apples, :alive
 
   def initialize
   end
@@ -30,15 +30,11 @@ class Fruit
 end
 
 class Apple <
-  attr_reader #what should go here 
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
   end
 end
-
-#THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
-# avg_diameter (line 58) will raise an error.
-# it should calculate the diameter of the apples in the basket
 
 def tree_data
   tree = Tree.new
@@ -75,5 +71,3 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-# Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
