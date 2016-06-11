@@ -27,11 +27,11 @@ describe AppleTree do
   let(:tree_details) do
     [
       AppleTreeData.new(1, 0),
-      AppleTreeData.new(13, 0),
-      AppleTreeData.new(43, 0),
-      AppleTreeData.new(52, 5),
-      AppleTreeData.new(71, 28),
-      AppleTreeData.new(83, 142),
+      AppleTreeData.new(3, 0),
+      AppleTreeData.new(4, 0),
+      AppleTreeData.new(5, 5),
+      AppleTreeData.new(6, 28),
+      AppleTreeData.new(7, 142),
     ]
   end
   let(:apple_tree) { AppleTree.new(tree_data) }
