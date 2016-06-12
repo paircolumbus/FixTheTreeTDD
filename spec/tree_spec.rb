@@ -1,9 +1,10 @@
 require 'rspec'
 require 'tree'
+require 'history'
 
 describe Tree do
   context "Tree with history" do
-    let(:tree_details) { [1, 2, 4, 6, 7].map { TreeData.new } }
+    let(:tree_details) { [1, 2, 4, 6, 7].map { |height| TreeData.new(height) } }
     let(:history) { TreeHistory.new(tree_details) }
     let(:tree) { Tree.new(history) }
 
