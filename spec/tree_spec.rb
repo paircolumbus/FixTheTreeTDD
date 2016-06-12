@@ -9,15 +9,19 @@ describe Tree do
 
     it "should live 5 years" do
       expect(tree.dead?).to eq false
+      expect(tree.age).to eq 0
 
       (tree_details.length + 1).times { tree.age! }
       expect(tree.dead?).to eq true
     end
 
     it "should change height each year" do
+      # Tree starts at height 0, age 0
+      expect(tree.height).to eq 0
+
       tree_details.each do |year|
-        expect(tree.height).to eq year.height
         tree.age!
+        expect(tree.height).to eq year.height
       end
     end
   end
