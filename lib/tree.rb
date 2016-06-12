@@ -27,23 +27,32 @@ end
 class AppleTree < Tree
   attr_reader :height, :age, :apples, :alive
 
-  def initialize
+  def initialize(color, history)
+    super(history)
+    @color = color
   end
 
   def age!
+    super
+
+    year = @history.get_year(@age)
+    apples = year.apples.map { |apple_size| Apple.new(@color, apple_size) }
+
+    add_apples(apples)
   end
 
-  def add_apples
+  def add_apples(apples)
+    @apples = apples
   end
 
   def any_apples?
+    @apples != nil and @apples.length > 0
   end
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
-  end
 
-  def dead?
+    @apples.shift()
   end
 end
 

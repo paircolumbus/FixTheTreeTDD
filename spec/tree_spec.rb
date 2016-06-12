@@ -47,8 +47,8 @@ describe AppleTree do
   end
 
   it 'should bear fruit after aging' do
-    3.times { apple_tree.age! }
-    expect(apple_tree.apples).to eq 5
+    4.times { apple_tree.age! }
+    expect(apple_tree.apples.length).to eq 5
 
     first_harvest.each do |apple_spec|
       expect(apple_tree.any_apples?).to eq true
@@ -62,12 +62,12 @@ describe AppleTree do
     apple_tree.age!
 
     expect(apple_tree.any_apples?).to eq true
-    expect(apple_tree.apples).to eq 28
+    expect(apple_tree.apples.length).to eq 28
 
     apple_tree.age!
 
     expect(apple_tree.any_apples?).to eq true
-    expect(apple_tree.apples).to eq 160
+    expect(apple_tree.apples.length).to eq 160
   end
 end
 
