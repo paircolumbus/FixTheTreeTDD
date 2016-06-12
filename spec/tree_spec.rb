@@ -96,6 +96,7 @@ describe Apple do
 end
 
 describe "tree_data" do
+  let(:utils) { Utils.new }
   let(:output) { double(puts) }
   let(:tree_details) do
     TreeHistory.new([
@@ -109,30 +110,32 @@ describe "tree_data" do
   end
 
   it "should describe the life of a tree" do
-    tree_data(tree_details)
+    allow(utils).to receive(:puts)
+
+    utils.tree_data(tree_details)
 
     # Initial age of tree when starts producing apples
-    expect(output).to have_received("Tree is 4 years old and 5 feet tall")
+    expect(utils).to receive(:puts).with("Tree is 4 years old and 5 feet tall").ordered
 
     # Age 4 reports
-    expect(output).to have_received("Year 4 Report")
-    expect(output).to have_received("Tree height: 5 feet")
-    expect(output).to have_received("Harvest:     5 apples with an average diameter of 2.2 inches")
-    expect(output).to have_received("")
+    expect(utils).to receive(:puts).with("Year 4 Report").ordered
+    expect(utils).to receive(:puts).with("Tree height: 5 feet").ordered
+    expect(utils).to receive(:puts).with("Harvest:     5 apples with an average diameter of 2.2 inches").ordered
+    expect(utils).to receive(:puts).with("").ordered
 
     # Age 5 reports
-    expect(output).to have_received("Year 5 Report")
-    expect(output).to have_received("Tree height: 6 feet")
-    expect(output).to have_received("Harvest:     28 apples with an average diameter of 2.79 inches")
-    expect(output).to have_received("")
+    expect(utils).to receive(:puts).with("Year 5 Report").ordered
+    expect(utils).to receive(:puts).with("Tree height: 6 feet").ordered
+    expect(utils).to receive(:puts).with("Harvest:     28 apples with an average diameter of 2.79 inches").ordered
+    expect(utils).to receive(:puts).with("").ordered
 
     # Age 6 reports
-    expect(output).to have_received("Year 6 Report")
-    expect(output).to have_received("Tree height: 7 feet")
-    expect(output).to have_received("Harvest:     142 apples with an average diameter of 4.08 inches")
-    expect(output).to have_received("")
+    expect(utils).to receive(:puts).with("Year 6 Report").ordered
+    expect(utils).to receive(:puts).with("Tree height: 7 feet").ordered
+    expect(utils).to receive(:puts).with("Harvest:     142 apples with an average diameter of 4.08 inches").ordered
+    expect(utils).to receive(:puts).with("").ordered
 
-    expect(output).to have_received("Alas, the tree, she is dead!")
+    expect(utils).to receive(:puts).with("Alas, the tree, she is dead!").ordered
   end
 end
 
