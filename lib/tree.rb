@@ -37,9 +37,11 @@ class AppleTree < Tree
     super
 
     year = @history.get_year(@age)
-    apples = year.apples.map { |apple_size| Apple.new(@color, apple_size) }
 
-    add_apples(apples)
+    if year != nil then
+      apples = year.apples.map { |apple_size| Apple.new(@color, apple_size) }
+      add_apples(apples)
+    end
   end
 
   def add_apples(apples)
