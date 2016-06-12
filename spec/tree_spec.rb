@@ -24,17 +24,18 @@ describe Tree do
 end
 
 describe AppleTree do
+  let(:first_harvest) { [2, 1, 2, 3, 3] }
   let(:tree_details) do
     [
-      AppleTreeData.new(1, 0),
-      AppleTreeData.new(3, 0),
-      AppleTreeData.new(4, 0),
-      AppleTreeData.new(5, 5),
-      AppleTreeData.new(6, 28),
-      AppleTreeData.new(7, 142),
+      AppleTreeData.new(1, []),
+      AppleTreeData.new(3, []),
+      AppleTreeData.new(4, []),
+      AppleTreeData.new(5, first_harvest),
+      AppleTreeData.new(6, ([2] * 12) + ([3] * 10) + ([4] * 6)),
+      AppleTreeData.new(7, ([2] * 19) + ([3] * 38) + ([4] * 43) + ([5] * 34) + ([6] * 23) + ([7] * 3)),
     ]
   end
-  let(:apple_tree) { AppleTree.new(tree_data) }
+  let(:apple_tree) { AppleTree.new("red", tree_data) }
 
   it 'should be a Tree' do
     expect(apple_tree.is_a? Tree).to eq true
@@ -42,8 +43,16 @@ describe AppleTree do
 
   it 'should bear fruit after aging' do
     3.times { apple_tree.age! }
-    expect(apple_tree.any_apples?).to eq true
     expect(apple_tree.apples).to eq 5
+
+    first_harvest.each do |apple_spec|
+      expect(apple_tree.any_apples?).to eq true
+      picked_apple = apple_tree.pick_an_apple!
+      expect(picked_apple.color).to eq "red"
+      expect(picked_apple.diameter).to eq apple_spec
+    end
+
+    expect(apple_tree.any_apples?).to eq false
 
     apple_tree.age!
 
@@ -53,7 +62,7 @@ describe AppleTree do
     apple_tree.age!
 
     expect(apple_tree.any_apples?).to eq true
-    expect(apple_tree.apples).to eq 142
+    expect(apple_tree.apples).to eq 160
   end
 end
 
