@@ -67,7 +67,7 @@ describe AppleTree do
     apple_tree.age!
 
     expect(apple_tree.any_apples?).to eq true
-    expect(apple_tree.apples.length).to eq 160
+    expect(apple_tree.apples.length).to eq 188
   end
 end
 

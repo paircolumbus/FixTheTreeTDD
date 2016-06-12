@@ -30,6 +30,7 @@ class AppleTree < Tree
   def initialize(color, history)
     super(history)
     @color = color
+    @apples = []
   end
 
   def age!
@@ -42,7 +43,7 @@ class AppleTree < Tree
   end
 
   def add_apples(apples)
-    @apples = apples
+    @apples += apples
   end
 
   def any_apples?
@@ -53,6 +54,10 @@ class AppleTree < Tree
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
 
     @apples.shift()
+  end
+
+  def pick_all_apples!
+    @apples = []
   end
 end
 
