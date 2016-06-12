@@ -26,6 +26,25 @@ class AppleTree < Tree
     @apples = []
   end
 
+  def age!
+    case @age
+    when 0..2
+      @height += 1
+    when 3..15
+      @height += 1.5
+      add_apples(create_apple(1))
+    when 16..25
+      @height += 0.5
+      add_apples(create_apple(3))
+    when 25..40
+      @height += 0.2
+      add_apples(create_apple(2))
+    else
+      add_apples(create_apple(1))
+    end
+    @age += 1
+  end
+
   def add_apples(apples)
     @apples.concat apples
   end
@@ -34,15 +53,26 @@ class AppleTree < Tree
     apples.any?
   end
 
-  def pick_an_apple
+  def pick_an_apple!
     raise NoApplesError, 'This tree has no apples' unless any_apples?
+    apples.pop
+  end
+
+  private
+
+  def create_apple(number_of_apples)
+    apple_array = []
+    number_of_apples.times do
+      color_array = %w(Red Yellow Green Gold)
+      color = color_array[Random.rand(0..3)]
+      diameter = Random.rand(0.1..5.0)
+      apple_array << Apple.new(color, diameter)
+    end
+    apple_array
   end
 end
 
 class Fruit
-  def initialize
-    has_seeds = true
-  end
 end
 
 class Apple < Fruit
@@ -51,7 +81,7 @@ class Apple < Fruit
   def initialize(color, diameter)
     super()
     @color = color
-    @diamter = diameter
+    @diameter = diameter
   end
 end
 
@@ -78,7 +108,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = 0 # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.count # It's up to you to calculate the average diameter for this harvest.
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
