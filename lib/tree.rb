@@ -11,16 +11,16 @@ class Tree
 
   def age!
     @age += 1
-    if @age > @history.length then
+    if @age > @history.life_span then
       @alive = false
     else
-      @height = @history[@age - 1].height
+      @height = @history.get_year(@age).height
     end
 
   end
 
   def dead?
-    @alive
+    !@alive
   end
 end
 
