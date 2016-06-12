@@ -94,12 +94,12 @@ describe "tree_data" do
   let(:output) { double(puts) }
   let(:tree_details) do
     [
-      AppleTreeData.new(1, 0),
-      AppleTreeData.new(3, 0),
-      AppleTreeData.new(4, 0),
-      AppleTreeData.new(5, 5),
-      AppleTreeData.new(6, 28),
-      AppleTreeData.new(7, 142),
+      AppleTreeData.new(1, []),
+      AppleTreeData.new(3, []),
+      AppleTreeData.new(4, []),
+      AppleTreeData.new(5, [2, 1, 2, 3, 3]),
+      AppleTreeData.new(6, ([2] * 12) + ([3] * 10) + ([4] * 6)),
+      AppleTreeData.new(7, ([2] * 19) + ([3] * 38) + ([4] * 43) + ([5] * 34) + ([6] * 23) + ([7] * 3)),
     ]
   end
 
@@ -112,19 +112,19 @@ describe "tree_data" do
     # Age 4 reports
     expect(output).to have_received("Year 4 Report")
     expect(output).to have_received("Tree height: 5 feet")
-    expect(output).to have_received("Harvest:     5 apples with an average diameter of # Need to specify the apple sizes so we can determine the average diameter--- 3 inches")
+    expect(output).to have_received("Harvest:     5 apples with an average diameter of 2.2 inches")
     expect(output).to have_received("")
 
     # Age 5 reports
     expect(output).to have_received("Year 5 Report")
     expect(output).to have_received("Tree height: 6 feet")
-    expect(output).to have_received("Harvest:     28 apples with an average diameter of # Need to specify the apple sizes--- 3 inches")
+    expect(output).to have_received("Harvest:     28 apples with an average diameter of 2.79 inches")
     expect(output).to have_received("")
 
     # Age 6 reports
     expect(output).to have_received("Year 6 Report")
     expect(output).to have_received("Tree height: 7 feet")
-    expect(output).to have_received("Harvest:     142 apples with an average diameter of # Need to specify the apple sizes--- 3 inches")
+    expect(output).to have_received("Harvest:     142 apples with an average diameter of 4.08 inches")
     expect(output).to have_received("")
 
     expect(output).to have_received("Alas, the tree, she is dead!")
