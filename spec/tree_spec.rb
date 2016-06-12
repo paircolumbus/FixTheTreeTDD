@@ -32,9 +32,9 @@ describe AppleTree do
   let(:first_harvest) { [2, 1, 2, 3, 3] }
   let(:tree_details) do
     TreeHistory.new([
-      AppleTreeData.new(1, []),
-      AppleTreeData.new(3, []),
-      AppleTreeData.new(4, []),
+      TreeData.new(1),
+      TreeData.new(3),
+      TreeData.new(4),
       AppleTreeData.new(5, first_harvest),
       AppleTreeData.new(6, ([2] * 12) + ([3] * 10) + ([4] * 6)),
       AppleTreeData.new(7, ([2] * 19) + ([3] * 38) + ([4] * 43) + ([5] * 34) + ([6] * 23) + ([7] * 3)),
