@@ -4,18 +4,18 @@ require 'tree'
 describe Tree do
   context "Tree with history" do
     let(:tree_details) { [1, 2, 4, 6, 7].map { TreeData.new } }
-    let(:history) { TreeHistory.new(tree_data) }
+    let(:history) { TreeHistory.new(tree_details) }
     let(:tree) { Tree.new(history) }
 
     it "should live 5 years" do
       expect(tree.dead?).to eq false
 
-      (tree_data.length + 1).times { tree.age! }
+      (tree_details.length + 1).times { tree.age! }
       expect(tree.dead?).to eq true
     end
 
     it "should change height each year" do
-      tree_data.each do |year|
+      tree_details.each do |year|
         expect(tree.height).to eq year.height
         tree.age!
       end
@@ -35,7 +35,7 @@ describe AppleTree do
       AppleTreeData.new(7, ([2] * 19) + ([3] * 38) + ([4] * 43) + ([5] * 34) + ([6] * 23) + ([7] * 3)),
     ]
   end
-  let(:apple_tree) { AppleTree.new("red", tree_data) }
+  let(:apple_tree) { AppleTree.new("red", tree_details) }
 
   it 'should be a Tree' do
     expect(apple_tree.is_a? Tree).to eq true

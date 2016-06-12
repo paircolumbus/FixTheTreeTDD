@@ -4,6 +4,23 @@ class Tree
 
   def initialize(history)
     @history = history
+    @age = 0
+    @height = 0
+    @alive = true
+  end
+
+  def age!
+    @age += 1
+    if @age > @history.length then
+      @alive = false
+    else
+      @height = @history[@age - 1].height
+    end
+
+  end
+
+  def dead?
+    @alive
   end
 end
 
