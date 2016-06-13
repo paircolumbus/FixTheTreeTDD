@@ -1,6 +1,12 @@
 require 'rspec'
-require 'tree'
-require 'history'
+require 'trees/tree'
+require 'trees/apple_tree'
+require 'trees/fruit'
+require 'trees/apple'
+require 'trees/tree_report'
+require 'trees/history/tree_data'
+require 'trees/history/apple_tree_data'
+require 'trees/history/tree_history'
 
 describe Tree do
   context "Tree with history" do
@@ -32,9 +38,9 @@ describe AppleTree do
   let(:first_harvest) { [2, 1, 2, 3, 3] }
   let(:tree_details) do
     TreeHistory.new([
-      TreeData.new(1),
-      TreeData.new(3),
-      TreeData.new(4),
+      AppleTreeData.new(1),
+      AppleTreeData.new(3),
+      AppleTreeData.new(4),
       AppleTreeData.new(5, first_harvest),
       AppleTreeData.new(6, ([2] * 12) + ([3] * 10) + ([4] * 6)),
       AppleTreeData.new(7, ([2] * 19) + ([3] * 38) + ([4] * 43) + ([5] * 34) + ([6] * 23) + ([7] * 3)),
@@ -97,7 +103,6 @@ end
 
 describe "tree_data" do
   let(:utils) { Utils.new }
-  let(:output) { double(puts) }
   let(:tree_details) do
     TreeHistory.new([
       AppleTreeData.new(1, []),
@@ -110,32 +115,31 @@ describe "tree_data" do
   end
 
   it "should describe the life of a tree" do
-    allow(utils).to receive(:puts)
+    lines = utils.tree_data(tree_details)
 
-    utils.tree_data(tree_details)
+    expected_report = <<-end
+Tree is 4 years old and 5 feet tall
+Year 4 Report
+Tree height: 5 feet
+Harvest:     5 apples with an average diameter of 2.2 inches
 
-    # Initial age of tree when starts producing apples
-    expect(utils).to receive(:puts).with("Tree is 4 years old and 5 feet tall").ordered
+Year 5 Report
+Tree height: 6 feet
+Harvest:     28 apples with an average diameter of 2.79 inches
 
-    # Age 4 reports
-    expect(utils).to receive(:puts).with("Year 4 Report").ordered
-    expect(utils).to receive(:puts).with("Tree height: 5 feet").ordered
-    expect(utils).to receive(:puts).with("Harvest:     5 apples with an average diameter of 2.2 inches").ordered
-    expect(utils).to receive(:puts).with("").ordered
+Year 6 Report
+Tree height: 7 feet
+Harvest:     160 apples with an average diameter of 4.08 inches
 
-    # Age 5 reports
-    expect(utils).to receive(:puts).with("Year 5 Report").ordered
-    expect(utils).to receive(:puts).with("Tree height: 6 feet").ordered
-    expect(utils).to receive(:puts).with("Harvest:     28 apples with an average diameter of 2.79 inches").ordered
-    expect(utils).to receive(:puts).with("").ordered
+Alas, the tree, she is dead!
+end
 
-    # Age 6 reports
-    expect(utils).to receive(:puts).with("Year 6 Report").ordered
-    expect(utils).to receive(:puts).with("Tree height: 7 feet").ordered
-    expect(utils).to receive(:puts).with("Harvest:     142 apples with an average diameter of 4.08 inches").ordered
-    expect(utils).to receive(:puts).with("").ordered
+    expected_lines = expected_report.split("\n")
 
-    expect(utils).to receive(:puts).with("Alas, the tree, she is dead!").ordered
+    # Compare expected report to actual lines
+    lines.each_with_index do |line, index|
+      expect(line).to eq expected_lines[index]
+    end
   end
 end
 
