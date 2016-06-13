@@ -9,7 +9,7 @@ data = TreeHistory.new([
   AppleTreeData.new(6, [2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 3, 1, 1]),
 ])
 
-utils = Utils.new
+reporter = TreeReporter.new
 
-utils.tree_data(data).each {|line| puts line }
+reporter.tree_data(data).each {|line| puts line }
 

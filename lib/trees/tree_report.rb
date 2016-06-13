@@ -1,6 +1,6 @@
 require_relative 'apple_tree'
 
-class Utils
+class TreeReporter
   def avg(nums)
     nums.reduce(:+) / nums.size.to_f
   end
