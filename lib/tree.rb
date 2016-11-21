@@ -1,19 +1,20 @@
 class NoApplesError < StandardError; end
 
-class AppleTree
-  attr_accessor :height, :age, :apples, :alive
 
-  def initialize
-    @age = 0
-    @height = 0
-    @apples = []
-    @alive = true
+class Tree
+  attr_reader :height, :age, :apples, :alive
+
+  def initialize(age = 0, height = 0, apples = [], alive = true)
+    @age = age
+    @height = height
+    @apples = apples
+    @alive = alive
   end
 
   def age!
-    if age < 30
-      @age += @age
-      @height += @height
+    if @age < 30
+      @age += 1
+      @height += 1
       if @age > 5
         add_apples
       end
@@ -23,7 +24,7 @@ class AppleTree
   end
 
   def add_apples
-    rand(1..4).times {@apples << Apple.new} 
+    rand(1..6).times {@apples << Apple.new()} 
   end
 
   def any_apples?
@@ -31,8 +32,11 @@ class AppleTree
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no apples" unless self.any_apples?
-    @apples.shuffle.pop
+    if @apples.empty?
+      raise NoApplesError, "This tree has no apples"
+    else
+      @apples.pop
+    end
   end
 
   def dead?
@@ -49,7 +53,7 @@ end
 class Apple < Fruit
   attr_reader :color, :diameter
 
-  def initialize(color, diameter)
+  def initialize()
     @color = ["red", "green", "yellow"].sample
     @diameter = rand(1.0..4.0).round(2)
   end
@@ -80,7 +84,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = diameter_sum / basket.length
+    avg_diameter = (diameter_sum / basket.length).round(2)
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
@@ -95,4 +99,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+tree_data
