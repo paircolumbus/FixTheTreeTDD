@@ -1,7 +1,7 @@
 class NoApplesError < StandardError; end
 
 
-class Tree
+class Tree 
   attr_reader :height, :age, :apples, :alive
 
   def initialize(age = 0, height = 0, apples = [], alive = true)
@@ -45,8 +45,10 @@ class Tree
 end
 
 class Fruit
+  attr_reader :has_seeds
+  
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
@@ -99,4 +101,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-tree_data
+# tree_data
