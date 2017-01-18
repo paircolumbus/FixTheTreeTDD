@@ -25,9 +25,7 @@ class Tree
 				@height += rand(1..10)	
 			else
 				# Produce a random number for apples
-				for i in 0..rand(0..5)
-					add_apples
-				end
+				rand(5).times { add_apples }
 			end
 		end
   end
