@@ -1,14 +1,20 @@
 require 'rspec'
-require 'tree'
+require '../lib/tree'
 
-describe 'Tree' do
+RSpec.describe 'Tree' do
   it 'should be a Class' do
     expect(described_class.is_a? 'Class').to be_true
   end
 end
 
-describe 'Fruit' do
+RSpec.describe 'Fruit' do
+  it 'should be a Class' do
+    expect(described_class.is_a? 'Class').to be_true
+  end
 end
 
-describe 'Apple' do
+RSpec.describe 'Apple' do
+  it 'should be a Class' do
+    expect(described_class.is_a? 'Class').to be_true
+  end
 end
