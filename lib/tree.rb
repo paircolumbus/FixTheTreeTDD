@@ -1,25 +1,45 @@
 class NoApplesError < StandardError; end
 
-class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+class Tree
+  attr_reader :height, :age
+  MAXIMUM_AGE = 100
+  MAXIMUM_FRUIT_DIAMETER = 10
 
   def initialize
+    @height = 0.5
+    @age = 0
+    @apples = []
   end
 
   def age!
+    @age += 1
+    @height += 0.5 unless height >= 30
+    add_apples
   end
 
   def add_apples
+    if age >= 3
+      grow_n_apples.times do
+        @apples.push(Apple.new('red', rand(MAXIMUM_FRUIT_DIAMETER)))
+      end
+    end
+  end
+
+  def grow_n_apples
+    rand(age / 2...age)
   end
 
   def any_apples?
+    @apples.any?
   end
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    @apples.pop
   end
 
   def dead?
+    age >= MAXIMUM_AGE
   end
 end
 
@@ -29,10 +49,12 @@ class Fruit
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
+    @color = color
+    @diameter = diameter
   end
 end
 
@@ -61,7 +83,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.length
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
