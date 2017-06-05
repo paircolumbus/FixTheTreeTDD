@@ -77,6 +77,20 @@ describe Tree do
     expect(tree).to be_dead
   end
 
+  it 'should continue to age in death' do
+    tree.age! until tree.dead?
+
+    start_age = tree.age
+    tree.age!
+
+    expect(tree.age - start_age).to eq 1
+
+    start_age = tree.age
+    20.times { tree.age! }
+
+    expect(tree.age - start_age).to eq 20
+  end
+
   it 'does not grow once dead' do
     tree.age! until tree.dead?
 
@@ -154,7 +168,8 @@ describe Apple do
     expect_failure = lambda { |d| expect { Apple.new('red', d) }.to raise_error(ArgumentError) }
     expect_success = lambda { |d| expect { Apple.new('red', d) }.not_to raise_error }
 
-    [Float::INFINITY, -Float::INFINITY, -1, 0].each &expect_failure
+    [Float::INFINITY, -Float::INFINITY].each &expect_failure
+    [-1, 0].each &expect_failure
     [1, 4, 2304].each &expect_success
   end
 end
