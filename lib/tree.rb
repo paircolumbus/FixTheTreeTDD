@@ -1,7 +1,7 @@
 class NoApplesError < StandardError; end
 
 class Tree
-  attr_accessor :height, :age, :apples, :alive
+  attr_reader :height, :age, :apples, :alive
 
   def initialize
     @height = 0
@@ -18,11 +18,11 @@ class Tree
   end
 
   def add_apples
-    apple = 12.times { @apples.push Apple.new("Red", Random.rand(1..6)) } #adds between 1-3 more apples every year, with random diameter
+    apple = 12.times { @apples.push Apple.new("Red", Random.rand(1..6)) } #creates 12 Red apples with ramdom diameters each year
   end
 
   def any_apples?
-    return @apples.length > 0
+    @apples.length > 0
   end
 
   def pick_an_apple!
@@ -31,7 +31,7 @@ class Tree
   end
 
   def dead?
-    return !@alive
+    !@alive
   end
 end
 
