@@ -14,12 +14,12 @@ class AppleTree
     @age+=1
     @alive = false unless @age < 9
     @height+=rand(20)
-    rand(1..10).times {self.add_apples}
+    self.add_apples
     @age
   end
 
   def add_apples
-    @apples+=1
+    rand(25..100).times{@apples+=1}
   end
 
   def any_apples?
@@ -94,4 +94,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+tree_data
