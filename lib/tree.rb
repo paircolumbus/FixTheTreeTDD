@@ -29,7 +29,7 @@ class AppleTree
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
     @apples-=1
-    Apple.new('Red', rand(1..100))
+    Apple.new('Red', rand(3.0..5.0))
   end
 
   def dead?
@@ -94,4 +94,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-tree_data
+# tree_data
