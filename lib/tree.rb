@@ -14,7 +14,7 @@ class AppleTree
     @age+=1
     @alive = false unless @age < 9
     @height+=rand(20)
-    rand(10).times {self.add_apples} if @age > 0
+    rand(1..10).times {self.add_apples}
     @age
   end
 
@@ -29,7 +29,7 @@ class AppleTree
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
     @apples-=1
-    Apple.new('Red', rand(100))
+    Apple.new('Red', rand(1..100))
   end
 
   def dead?
