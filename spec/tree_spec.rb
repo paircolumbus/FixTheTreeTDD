@@ -16,6 +16,10 @@ describe AppleTree do
       expect(tree.any_apples?).to eq false
     end
 
+    it 'should not be able to have an apple picked' do
+      expect{tree.pick_an_apple!}.to raise_error NoApplesError
+    end
+
     it 'should be alive' do
       expect(tree.alive).to eq true
     end
