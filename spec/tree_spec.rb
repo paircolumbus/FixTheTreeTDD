@@ -42,13 +42,14 @@ describe Fruit do
 end
 
 describe Apple do
-  let(:apple) { Apple.new('red', 5) }
+  let(:apple) { Apple.new }
 
   it "should have a color" do
-  	expect(apple.color).to eq 'red'
+  	colors = ['red', 'green', 'yellow']
+  	expect(colors).to include apple.color
   end
 
   it 'should have a diameter' do
-  	expect(apple.diameter).to eq 5
+  	expect(apple.diameter).to be_between(1,5).inclusive
   end
 end

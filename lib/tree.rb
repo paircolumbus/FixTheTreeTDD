@@ -9,7 +9,6 @@ class AppleTree
     @age = 0
     @apples = []
     @alive = true
-    @colors = ['red', 'green', 'yellow']
   end
 
   def age!
@@ -20,12 +19,12 @@ class AppleTree
 
   def add_apples
     rand(1..(4*@age)).times do
-      @apples << Apple.new(@colors[rand(0..2)], rand(1..5))
+      @apples << Apple.new
     end
   end
 
   def any_apples?
-    @apples.length > 0 ? true : false
+    @apples.empty? ? false : true
   end
 
   def pick_an_apple!
@@ -34,11 +33,7 @@ class AppleTree
   end
 
   def dead?
-    if @height > 60 || @age > 13
-      true
-    else
-      false
-    end
+    @height > 60 || @age > 13
   end
 end
 
@@ -53,9 +48,10 @@ end
 class Apple < Fruit
   attr_reader :color, :diameter 
 
-  def initialize(color, diameter)
-    @color = color
-    @diameter = diameter
+  def initialize
+    colors = ['red', 'green', 'yellow']
+    @color = colors.sample
+    @diameter = rand(1..5).to_f
   end
 end
 
@@ -84,7 +80,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = diameter_sum/basket.length
+    avg_diameter = (diameter_sum/basket.length).round(2)
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
