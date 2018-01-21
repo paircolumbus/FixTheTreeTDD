@@ -7,8 +7,10 @@ describe AppleTree do
   it { expect(tree.class).to be AppleTree  }
 
   it 'will age' do
+  	tree.age = rand(1..10)
+  	previous_tree_age = tree.age
   	tree.age!
-    expect(tree.age).to eq 1
+    expect(tree.age).to eq (previous_tree_age + 1)
   end
 
   it 'can add apples' do
