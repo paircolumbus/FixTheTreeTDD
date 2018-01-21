@@ -26,7 +26,8 @@ describe AppleTree do
   	end
 
   	it 'removes an apple when present' do
-  	  tree.age!
+  	  tree.age = rand(1..12)
+  	  tree.add_apples
   	  remaining_apples = tree.apples.length - 1
   	  tree.pick_an_apple!
   	  expect(tree.apples.length).to eq remaining_apples
