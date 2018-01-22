@@ -29,35 +29,35 @@ describe Tree do
   end
 
   it 'has a height' do
-    raise unless tree(height: 15).height == 15
+    expect(tree(height: 15).height).to eq(15)
   end
 
   it 'has an age' do
-    raise unless tree(age: 75).age == 75
+    expect(tree(age: 75).age).to eq(75)
   end
 
   context 'is alive' do
     subject { tree }
 
     it 'can have apples' do
-      raise unless tree.any_apples?
+      expect(tree.any_apples?).to be true
     end
 
     it 'can have no apples' do
-      raise unless not tree(apples: []).any_apples?
+      expect(tree(apples: []).any_apples?).to be false
     end
 
     it 'can grow apples' do
       original_apples_count = subject.apples.count
       subject.add_apples
       new_apples_count = subject.apples.count
-      raise unless original_apples_count < new_apples_count
+      expect(original_apples_count).to be < new_apples_count
     end
 
     context 'has apples' do
       it 'can be picked' do
-        apple = subject.pick_an_apple!
-        expect(apple.class).to eq(Apple)
+        picked_apple = subject.pick_an_apple!
+        expect(picked_apple.class).to eq(Apple)
       end
     end
 
@@ -74,7 +74,7 @@ describe Tree do
         original_tree_height = subject.height
         subject.age!
         new_tree_height = subject.height
-        raise unless original_tree_height < new_tree_height
+        expect(original_tree_height).to be < new_tree_height
       end
     end
 
@@ -85,7 +85,7 @@ describe Tree do
         original_tree_height = subject.height
         subject.age!
         new_tree_height = subject.height
-        raise unless original_tree_height == new_tree_height
+        expect(original_tree_height).to eq new_tree_height
       end
     end
 
@@ -94,7 +94,7 @@ describe Tree do
         original_tree_age = subject.age
         subject.age!
         new_tree_age = subject.age
-        raise unless original_tree_age < new_tree_age
+        expect(original_tree_age).to be < new_tree_age
       end
     end
 
@@ -103,7 +103,7 @@ describe Tree do
 
       it 'dies' do
         subject.age!
-        raise unless subject.dead?
+        expect(subject.dead?).to be true
       end
     end
   end
@@ -119,7 +119,7 @@ describe Tree do
     end
 
     it 'has no apples' do
-      raise unless @dead_tree.apples.count == 0
+      expect(@dead_tree.apples.count).to eq(0)
     end
 
     it 'cannot grow apples' do
@@ -138,7 +138,7 @@ describe Fruit do
   end
 
   it 'has seeds' do
-    raise unless Fruit.new.has_seeds?
+    expect(Fruit.new.has_seeds?).to be true
   end
 end
 
@@ -152,14 +152,14 @@ describe Apple do
   end
 
   it 'has a color' do
-    raise unless apple(color: "green").color == "green"
+    expect(apple(color: "green").color).to eq("green")
   end
 
   it 'has a diameter' do
-    raise unless apple(diameter: 2).diameter == 2
+    expect(apple(diameter: 2).diameter).to eq(2)
   end
 
   it 'has seeds' do
-    raise unless Apple.new.has_seeds?
+    expect(apple.has_seeds?).to be true
   end
 end
