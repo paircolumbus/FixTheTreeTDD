@@ -1,7 +1,7 @@
-class NoApplesError < StandardError; end
+class NoFruitError < StandardError; end
 
-class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+class Tree
+  attr_#fill_in :height, :age, :alive, :fruit
 
   def initialize
   end
@@ -9,18 +9,22 @@ class AppleTree
   def age!
   end
 
-  def add_apples
-  end
-
-  def any_apples?
-  end
-
-  def pick_an_apple!
-    raise NoApplesError, "This tree has no apples" unless self.any_apples?
-  end
-
   def dead?
   end
+
+  def add_fruit
+  end
+
+  def any_fruit?
+  end
+
+  def pick_fruit!
+    raise NoFruitError, "This tree has no fruit" unless self.any_fruit?
+  end
+end
+
+class AppleTree <
+  #what should go here if anything?
 end
 
 class Fruit
@@ -30,29 +34,29 @@ class Fruit
 end
 
 class Apple <
-  attr_reader #what should go here 
+  attr_reader #what should go here?
 
   def initialize(color, diameter)
   end
 end
 
-#THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
+#THERE SHOULD ONLY BE TWO THINGS YOU NEED TO EDIT BELOW THIS LINE
 # avg_diameter (line 58) will raise an error.
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
-  tree.age! until tree.any_apples?
+  tree.age! until tree.any_fruit?
 
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
 
   until tree.dead?
     basket = []
 
-    # It places the apple in the basket
-    while tree.any_apples?
-      basket << tree.pick_an_apple!
+    # It places the fruit in the basket
+    while tree.any_fruit?
+      basket << tree.pick_fruit!
     end
 
     diameter_sum = 0
