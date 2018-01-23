@@ -12,7 +12,7 @@ class Tree
   end
 
   def age!
-    raise DeadTreeError, "This tree is dead" unless not self.dead?
+    raise DeadTreeError, "This tree is dead" if self.dead?
     @age += 1
     @height += 1 if @height < 25
     add_apples if @age > 5
@@ -20,7 +20,7 @@ class Tree
   end
 
   def add_apples
-    raise DeadTreeError, "This tree is dead" unless not self.dead?
+    raise DeadTreeError, "This tree is dead" if self.dead?
     rand(50..100).times { @apples << Apple.new(color: "red", diameter: rand(2..4)) }
   end
 
@@ -29,7 +29,7 @@ class Tree
   end
 
   def pick_an_apple!
-    raise DeadTreeError, "This tree is dead" unless not self.dead?
+    raise DeadTreeError, "This tree is dead" if self.dead?
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
     @apples.shift
   end
