@@ -1,38 +1,69 @@
 class NoApplesError < StandardError; end
+class DeadTreeError < StandardError; end
 
-class AppleTree
-  attr_#fill_in :height, :age, :apples, :alive
+class Tree
+  attr_accessor :height, :age, :apples, :alive
 
-  def initialize
+  def initialize(height: 0, age: 0, apples: [], alive: true)
+    @height = height
+    @age = age
+    @apples = apples
+    @alive = alive
   end
 
   def age!
+    raise DeadTreeError, "This tree is dead" if self.dead?
+    @age += 1
+    @height += 1 if @height < 25
+    add_apples if @age > 5
+    kill! if @age > 200
   end
 
   def add_apples
+    raise DeadTreeError, "This tree is dead" if self.dead?
+    rand(50..100).times { @apples << Apple.new(color: "red", diameter: rand(2..4)) }
   end
 
   def any_apples?
+    @apples.count > 0
   end
 
   def pick_an_apple!
+    raise DeadTreeError, "This tree is dead" if self.dead?
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    @apples.shift
   end
 
   def dead?
+    !@alive
+  end
+
+  def kill!
+    @alive = false
+    @apples = []
   end
 end
 
 class Fruit
-  def initialize
-    has_seeds = true
+  attr_reader :has_seeds
+
+  def initialize(has_seeds: true)
+    @has_seeds = has_seeds
+  end
+
+  def has_seeds?
+    @has_seeds
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
 
-  def initialize(color, diameter)
+  def initialize(color: "red", diameter: 3)
+    super()
+
+    @color = color
+    @diameter = diameter
   end
 end
 
@@ -61,7 +92,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.count
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
