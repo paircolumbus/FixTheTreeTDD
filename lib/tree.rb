@@ -22,7 +22,12 @@ class Tree
   end
 
   def add_apples
-    @apples.push(Apple.new('red', 2))
+    num_apples = rand(1..5) * @age
+    i=0
+    while i < num_apples
+     @apples.push(Apple.new('red', rand(1..3)))
+     i += 1
+    end
   end
 
   def any_apples?
@@ -31,6 +36,7 @@ class Tree
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    @apples.pop
   end
 
   def dead?
@@ -78,7 +84,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = basket.size > 0 ? diameter_sum / basket.size : 0
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
@@ -93,4 +99,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+tree_data
