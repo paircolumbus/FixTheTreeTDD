@@ -22,11 +22,9 @@ class Tree
   end
 
   def add_apples
-    num_apples = rand(1..5) * @age
-    i=0
-    while i < num_apples
+    num_apples = rand(1..5) * @age + 1
+    num_apples.times do
      @apples.push(Apple.new('red', rand(1..3)))
-     i += 1
     end
   end
 

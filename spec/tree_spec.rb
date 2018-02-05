@@ -28,10 +28,8 @@ describe 'Tree' do
   end
 
   it 'should be able to have apples picked' do
-    i=0
-    while i<10
+    10.times do
       tree.add_apples
-      i += 1
     end
     current_apples = tree.apples.size
     tree.pick_an_apple!
@@ -40,10 +38,8 @@ describe 'Tree' do
   end
 
   it 'should die after 50 years' do
-    i=0
-    while i<51
+    51.times do
       tree.age!
-      i +=1
     end
     expect(tree.dead?).to be true
   end
