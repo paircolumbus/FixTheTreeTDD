@@ -1,6 +1,6 @@
 class NoApplesError < StandardError; end
 
-class AppleTree
+class Tree
   attr_#fill_in :height, :age, :apples, :alive
 
   def initialize
