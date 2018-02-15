@@ -3,7 +3,7 @@ require 'tree'
 
 describe Tree do
   it 'should be a Class' do
-    expect(described_class.is_a? Class).to be_true
+    expect(described_class.is_a? Class).to eq true
   end
 end
 
