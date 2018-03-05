@@ -3,40 +3,46 @@ class DeadTreeError < StandardError; end
 
 class Tree
 
-  attr_reader :height
-  attr_reader :age
-  attr_reader :apples
+  attr_reader :height, :age, :apples
   attr_accessor :alive
 
-  def initialize(height = 0, age = 0, apples = [], alive = true)
+  def initialize(height: 0, age: 0, apples: [], alive: true, rand_seed: nil)
     @height = height
     @age = age
     @apples = apples
     @alive = alive
+    @prng = Random.new(rand_seed || Random.new_seed)
   end
 
   def age!
     raise DeadTreeError, "This tree is dead" if self.dead?
     @age += 1
 
-    # Simple check if a tree has become too old
-    if @age >= 10
+
+    # Simple check if a tree has become too old.
+    if @age >= 10 && age + @prng.rand(0..10) > 20
       @alive = false
     end
 
     # What to do when a tree is alive and is aging
     if @alive
-      @height += 1
+      inc_height!
       add_apples
     end
+  end
 
+  def inc_height!
+    @height += @prng.rand(1..3)
   end
 
   def add_apples
     raise DeadTreeError, "This tree is dead" if self.dead?
-    # Change this if you want to change how apples are added/removed
-    count = @height
-    count.times { @apples.push(Apple.new('red', 1)) }
+
+    count = @height * @prng.rand(1..3)
+    color = Apple.colors.sample
+    diameter = @prng.rand(4..8)
+
+    count.times { @apples.push(Apple.new(color, diameter)) }
   end
 
   def any_apples?
@@ -53,6 +59,7 @@ class Tree
   end
 end
 
+
 class Fruit
   attr_reader :has_seeds
 
@@ -61,8 +68,17 @@ class Fruit
   end
 end
 
+
 class Apple < Fruit
   attr_reader :color, :diameter
+
+  @@colors = ['red', 'yellow', 'green']
+
+  class << self
+    def colors
+      @@colors
+    end
+  end
 
   def initialize(color, diameter)
     super()
@@ -112,4 +128,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+#tree_data
