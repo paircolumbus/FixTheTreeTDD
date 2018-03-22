@@ -1,5 +1,5 @@
 require 'rspec'
-require 'tree'
+require_relative '../lib/tree'
 
 describe Tree do
   it 'should be a Class' do
