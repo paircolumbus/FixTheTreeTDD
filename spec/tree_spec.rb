@@ -26,10 +26,28 @@ describe Tree do
     3.times { tree.age! }
     expect(tree.any_apples?).to be(false)
   end
+
+  it "starts producing apples after 3 years" do
+    4.times { tree.age! }
+    expect(tree.any_apples?).to be(true)
+  end
 end
 
 describe 'Fruit' do
 end
 
 describe 'Apple' do
+  let(:apple) { Apple.new("red", 3.5)}
+
+  it "has a color" do
+    expect(apple.color).to eq("red")
+  end
+
+  it "has a diameter" do
+    expect(apple.diameter).to eq(3.5)
+  end
+
+  it "has seeds" do
+    expect(apple.has_seeds).to be(true)
+  end
 end

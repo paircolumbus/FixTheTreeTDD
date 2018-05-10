@@ -44,9 +44,11 @@ class Fruit
 end
 
 class Apple < Fruit
-  # attr_reader #what should go here
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
+    @color = color
+    @diameter = diameter
   end
 end
 
