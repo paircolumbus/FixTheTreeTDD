@@ -13,7 +13,13 @@ describe Tree do
   end
 
   it "can age" do
-    expect(tree.age!).to eq(1)
+    tree.age!
+    expect(tree.age).to eq(1)
+  end
+
+  it "grows as it ages" do
+    tree.age!
+    expect(tree.height).to eq(2)
   end
 end
 
