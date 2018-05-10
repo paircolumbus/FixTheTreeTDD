@@ -21,6 +21,11 @@ describe Tree do
     tree.age!
     expect(tree.height).to eq(2)
   end
+
+  it "doesn't have apples for 3 years" do
+    3.times { tree.age! }
+    expect(tree.any_apples?).to be(false)
+  end
 end
 
 describe 'Fruit' do

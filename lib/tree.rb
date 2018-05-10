@@ -1,13 +1,14 @@
 class NoApplesError < StandardError; end
 
 class Tree
-  attr_accessor :height, :age
+  attr_accessor :height, :age, :apples
 
 #  attr_fill_in :height, :age, :apples, :alive
 
   def initialize
     self.height = 0
     self.age = 0
+    self.apples = []
   end
 
   def age!
@@ -25,6 +26,7 @@ class Tree
   end
 
   def any_apples?
+    self.apples.length > 0
   end
 
   def pick_an_apple!
