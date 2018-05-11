@@ -1,38 +1,60 @@
+require 'pry'
+
 class NoApplesError < StandardError; end
 
 class Tree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_accessor :height, :age, :apples, :alive
 
   def initialize
+    @height = 1
+    @age = 0
+    @apples = []
+    @alive = true
   end
 
   def age!
+    self.age += 1
+    unless self.height >= 20
+      self.height += 1
+    end
+    self.age > 8 ? self.add_apples : false
+    self.dead? ? self.alive = false : self.alive = true
   end
 
   def add_apples
+    3.times do self.apples << Apple.new("red", rand(2..4)) end
   end
 
   def any_apples?
+    self.apples.length > 0
   end
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    self.apples.pop
   end
 
   def dead?
+    self.age >= 100
   end
 end
 
 class Fruit
+  attr_reader :has_seeds
+  
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
+  #what should go here 
 
   def initialize(color, diameter)
+    super()
+    @color = color
+    @diameter = diameter
   end
 end
 
@@ -61,8 +83,9 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
-
+    # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum/basket.length
+      
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
     puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
@@ -77,3 +100,5 @@ end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
 # tree_data
+
+# Tree.new
