@@ -118,16 +118,21 @@ describe Tree do
 end
 
 describe Fruit do
+  # I don't really use the fruit class at all
 end
 
 describe Apple do
-  let(:apple) { Apple.new('red', 3) }
-  it 'is an instance of Fruit' do
+  let(:apple) { Apple.new('red', 2.5) }
+
+  it 'should be a Fruit' do
     expect(apple).to be_a Fruit
   end
 
-  it 'has a color and diameter' do
+  it 'should have a color' do
     expect(apple.color).to eq 'red'
-    expect(apple.diameter).to eq 3
+  end
+
+  it 'should have a diameter' do
+    expect(apple.diameter).to eq 2.5
   end
 end
