@@ -12,6 +12,10 @@ describe Tree do
     expect(tree.age).to eq(0)
   end
 
+  it "is alive" do
+    expect(tree.dead?).to be(false)
+  end
+
   it "can age" do
     tree.age!
     expect(tree.age).to eq(1)
@@ -31,9 +35,22 @@ describe Tree do
     4.times { tree.age! }
     expect(tree.any_apples?).to be(true)
   end
+
+  it "can be harvested for apples" do
+    4.times { tree.age! }
+    expect(tree.pick_an_apple!).to be_instance_of(Apple)
+  end
+
+  it "dies after 20 years" do
+    21.times { tree.age! }
+    expect(tree.dead?).to be(true)
+  end
 end
 
 describe 'Fruit' do
+  it "has seeds" do
+    expect(Fruit.new.has_seeds).to be(true)
+  end
 end
 
 describe 'Apple' do
