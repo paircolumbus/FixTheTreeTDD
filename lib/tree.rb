@@ -4,28 +4,28 @@ class Tree
   attr_reader :height, :age, :apples, :alive
 
   def initialize
-    @apples = []
-    @age = 1
-    @height = 1
+    @age = 0
+    @height = 0
     @alive = true
+    @apples = []
   end
 
   def age!
-    if @age >= 10
-      @alive = false
-    else
+    if @age <= 10
       @age += 1
       @height += 1.5
-      @alive = false if @age >= 10
     end
+    add_apples if @age.between?(1, 10)
+    @alive = false if @age > 10
   end
 
   def add_apples
-    apples << Apple.new(:red, 1)
+    p 'added apples'
+    @apples << Apple.new('red', 1)
   end
 
   def any_apples?
-    apples.any?
+    @apples.count > 0
   end
 
   def pick_an_apple!
@@ -38,8 +38,10 @@ class Tree
 end
 
 class Fruit
+  attr_reader :has_seeds
+
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
@@ -66,7 +68,6 @@ def tree_data
   until tree.dead?
     basket = []
 
-    # It places the apple in the basket
     while tree.any_apples?
       basket << tree.pick_an_apple!
     end
@@ -77,7 +78,7 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.count
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
@@ -92,4 +93,4 @@ def tree_data
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+tree_data
