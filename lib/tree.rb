@@ -1,42 +1,63 @@
 class NoApplesError < StandardError; end
 
 class Tree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_reader :height, :age, :apples, :alive
 
   def initialize
+    @age = 0
+    @height = 0
+    @alive = true
+    @apples = []
   end
 
   def age!
+    if @age <= 10
+      @age += 1
+      @height += rand(1...3)
+      add_apples
+    end
+    @alive = false if @age > 10
   end
 
   def add_apples
+    rand(1..20).times do
+      @apples << Apple.new('red', rand(1..5))
+    end
   end
 
   def any_apples?
+    @apples.count > 0
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    raise NoApplesError, 'This tree has no apples' unless any_apples?
+    @apples.shift
   end
 
   def dead?
+    !@alive
   end
 end
 
 class Fruit
-  def initialize
-    has_seeds = true
+  attr_reader :has_seeds
+
+  def initialize(has_seeds = true)
+    @has_seeds = has_seeds
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
+    @color = color
+    @diameter = diameter
+    super(true)
   end
 end
 
-#THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
+# THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
 # avg_diameter (line 58) will raise an error.
 # it should calculate the diameter of the apples in the basket
 
@@ -50,10 +71,7 @@ def tree_data
   until tree.dead?
     basket = []
 
-    # It places the apple in the basket
-    while tree.any_apples?
-      basket << tree.pick_an_apple!
-    end
+    basket << tree.pick_an_apple! while tree.any_apples?
 
     diameter_sum = 0
 
@@ -61,18 +79,18 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum / basket.size
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
     puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
-    puts ""
+    puts ''
 
     # Ages the tree another year
     tree.age!
   end
 
-  puts "Alas, the tree, she is dead!"
+  puts 'Alas, the tree, she is dead!'
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
