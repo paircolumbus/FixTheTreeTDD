@@ -5,11 +5,16 @@ describe Tree do
   it 'should be a Class' do
     expect(described_class.is_a?(Class)).to eq true
   end
-  it 'should be dead at the age of 10' do
-    9.times { subject.age! }
+  it 'should be dead at the age of 11' do
+    10.times { subject.age! }
     expect(subject).to_not be_dead
     subject.age!
     expect(subject).to be_dead
+  end
+  it 'should age if asked' do
+    prev_value = subject.age
+    subject.age!
+    expect(subject.age).to be > prev_value
   end
   it 'should not have any apples at birth' do
     expect(subject.any_apples?).to eq false

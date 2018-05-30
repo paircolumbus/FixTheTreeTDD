@@ -13,15 +13,16 @@ class Tree
   def age!
     if @age <= 10
       @age += 1
-      @height += 1.5
+      @height += rand(1...3)
+      add_apples
     end
-    add_apples if @age.between?(1, 10)
     @alive = false if @age > 10
   end
 
   def add_apples
-    p 'added apples'
-    @apples << Apple.new('red', 1)
+    rand(1..20).times do
+      @apples << Apple.new('red', rand(1..5))
+    end
   end
 
   def any_apples?
@@ -29,7 +30,8 @@ class Tree
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    raise NoApplesError, 'This tree has no apples' unless any_apples?
+    @apples.shift
   end
 
   def dead?
@@ -40,8 +42,8 @@ end
 class Fruit
   attr_reader :has_seeds
 
-  def initialize
-    @has_seeds = true
+  def initialize(has_seeds = true)
+    @has_seeds = has_seeds
   end
 end
 
@@ -51,10 +53,11 @@ class Apple < Fruit
   def initialize(color, diameter)
     @color = color
     @diameter = diameter
+    super(true)
   end
 end
 
-#THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
+# THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
 # avg_diameter (line 58) will raise an error.
 # it should calculate the diameter of the apples in the basket
 
@@ -68,9 +71,7 @@ def tree_data
   until tree.dead?
     basket = []
 
-    while tree.any_apples?
-      basket << tree.pick_an_apple!
-    end
+    basket << tree.pick_an_apple! while tree.any_apples?
 
     diameter_sum = 0
 
@@ -78,19 +79,19 @@ def tree_data
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = diameter_sum / basket.count
+    avg_diameter = diameter_sum / basket.size
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
     puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
-    puts ""
+    puts ''
 
     # Ages the tree another year
     tree.age!
   end
 
-  puts "Alas, the tree, she is dead!"
+  puts 'Alas, the tree, she is dead!'
 end
 
 # Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-tree_data
+# tree_data
