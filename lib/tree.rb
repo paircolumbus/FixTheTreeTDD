@@ -11,25 +11,38 @@ class Tree
   end
 
   def age! # I'm not sure why this has a bang
+    if @age == 50
+      @alive = false
+    elsif
+      @age = @age + 1
+    end
   end
 
-  def add_apples
+  def add_apples(number_of_apples)
+    @apples.concat([Apple.new('red', 9)] * number_of_apples)
   end
 
   def any_apples?
+    @apples.length >= 1 ? true : false
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    if self.any_apples?
+      return @apples.pop
+    else
+      raise NoApplesError, "This tree has no apples"
+    end
+
   end
 
   def dead?
+    !@alive
   end
 end
 
 class Fruit
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 

@@ -25,12 +25,49 @@ describe Tree do
   end
 
   # TODO age! should modify age ?!
-  # TODO any_apples should return true if apples isn't empty
-  # TODO any_apples should return true if apples is empty
-  # TODO pick_an_apple should pick an apple, remove it from the list ?!
-  # TODO pick_an_apple should raise NoApplesError if apples is empty
-  # TODO dead should return true if the tree is dead
-  # TODO dead should return false if the tree is alive
+  it 'ages by one year everytime age! is called' do
+    tree.age = 1
+    tree.age!
+    expect(tree.age).to be 2
+  end
+  
+  it 'grows n apples if add_apples is called with n number of apples' do
+    tree.apples = []
+    tree.add_apples 10
+    expect(tree.apples.length).to be 10
+  end
+  
+  it 'returns true if the tree has grown apples' do
+    tree.apples = []
+    tree.add_apples(1)
+    expect(tree.any_apples?).to be true
+  end
+
+  it 'returns false if the tree has no apples' do
+    tree.apples = []
+    expect(tree.any_apples?).to be false
+  end
+  
+  it 'returns an apple when pick_an_apple is called' do
+    expect(tree.any_apples?).to be false
+    tree.add_apples 1
+    expect(tree.pick_an_apple!).to be_an_instance_of(Apple)
+    expect(tree.any_apples?).to be false
+  end
+
+  it 'raises an error if the tree has no apples' do
+    tree.apples = []
+    expect { tree.pick_an_apple! }.to raise_error(NoApplesError)
+  end
+
+  it 'is dead when calling dead? is returns true' do
+    tree.alive = false
+    expect(tree.dead?).to be true
+  end
+
+  it 'is alive when calling dead? returns false' do
+    expect(tree.dead?).to be false
+  end
 end
 
 describe Fruit do
