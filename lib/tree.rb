@@ -24,12 +24,12 @@ class Tree
   end
 
   def any_apples?
-    @apples.length >= 1 ? true : false
+    @apples.length >= 1
   end
 
   def pick_an_apple!
     if self.any_apples?
-      return @apples.pop
+      @apples.pop
     else
       raise NoApplesError, "This tree has no apples"
     end
