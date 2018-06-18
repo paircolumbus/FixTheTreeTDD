@@ -1,38 +1,58 @@
 class NoApplesError < StandardError; end
 
 class Tree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_accessor :age
+  attr_reader :alive, :height, :apples
 
-  def initialize
+  def initialize(age, apples=[], alive, height)
+    @age = age
+    @apples = apples
+    @alive = alive
+    @height = height
   end
 
-  def age!
+  def age! # I'm not sure why this has a bang
+    if @age >= 50
+      @alive = false
+    elsif
+      @age = @age + 1
+    end
   end
 
-  def add_apples
+  def add_apples(number_of_apples)
+    @apples.concat([Apple.new('red', 9)] * number_of_apples)
   end
 
   def any_apples?
+    @apples.length >= 1
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    if self.any_apples?
+      @apples.pop
+    else
+      raise NoApplesError, "This tree has no apples"
+    end
+
   end
 
   def dead?
+    !@alive
   end
 end
 
 class Fruit
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :has_seeds #what should go here 
 
   def initialize(color, diameter)
+    @color = color
+    @diameter = diameter
   end
 end
 
