@@ -32,19 +32,16 @@ describe Tree do
   end
   
   it 'grows n apples if add_apples is called with n number of apples' do
-    tree.apples = []
     tree.add_apples 10
     expect(tree.apples.length).to be 10
   end
   
   it 'returns true if the tree has grown apples' do
-    tree.apples = []
     tree.add_apples(1)
     expect(tree.any_apples?).to be true
   end
 
   it 'returns false if the tree has no apples' do
-    tree.apples = []
     expect(tree.any_apples?).to be false
   end
   
@@ -56,12 +53,12 @@ describe Tree do
   end
 
   it 'raises an error if the tree has no apples' do
-    tree.apples = []
     expect { tree.pick_an_apple! }.to raise_error(NoApplesError)
   end
 
   it 'is dead when calling dead? is returns true' do
-    tree.alive = false
+    tree.age = 50
+    tree.age!
     expect(tree.dead?).to be true
   end
 

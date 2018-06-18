@@ -1,7 +1,8 @@
 class NoApplesError < StandardError; end
 
 class Tree
-  attr_accessor :height, :age, :apples, :alive
+  attr_accessor :age
+  attr_reader :alive, :height, :apples
 
   def initialize(age, apples=[], alive, height)
     @age = age
@@ -11,7 +12,7 @@ class Tree
   end
 
   def age! # I'm not sure why this has a bang
-    if @age == 50
+    if @age >= 50
       @alive = false
     elsif
       @age = @age + 1
