@@ -16,7 +16,7 @@ class Tree
   end
 
   def add_apples
-    rand(5..15).times do @apples.push(Apple.new()) end
+    rand(5..15).times { @apples.push(Apple.new }
   end
 
   def any_apples?
@@ -43,7 +43,7 @@ class Apple < Fruit
   attr_reader :color, :diameter
 
   def initialize()
-    @color = ['red'].sample
+    @color = ['red','yellow', 'green'].sample
     @diameter = rand(5..10)
   end
 end

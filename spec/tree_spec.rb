@@ -22,8 +22,11 @@ describe Fruit do
 end
 
 describe Apple do
-  it 'apple should be a an instance of Apple and subclass of Fruit' do
+  it 'Apple should be a subclass of Fruit' do
+    expect(Apple).to be < Fruit
+  end
+  it 'apple should be a an instance of Apple' do
     apple = Apple.new()
-    expect(apple).to be_a_kind_of(Fruit)
+    expect(apple).to be_an_instance_of(Apple)
   end
 end
