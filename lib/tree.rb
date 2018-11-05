@@ -16,7 +16,7 @@ class Tree
   end
 
   def add_apples
-    rand(5..15).times { @apples.push(Apple.new }
+    rand(5..15).times { @apples.push(Apple.new) }
   end
 
   def any_apples?
