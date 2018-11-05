@@ -1,44 +1,70 @@
 class NoApplesError < StandardError; end
 
 class Tree
-  attr_#fill_in :height, :age, :apples, :alive
+  attr_reader :height, :age, :apples, :alive
 
   def initialize
+    @height = 0
+    @age = 0
+    @apples = []
+    @alive = true
   end
 
   def age!
+    case @age
+    when 0...5
+      @age += 1
+      @height += rand(1.5...2.5)
+    when 5...10
+      @age += 1
+      @height += rand(0.5...1.0)
+      add_apples
+    when 10...15
+      @age += 1
+      @height += rand (0.1...0.5)
+      add_apples
+    else
+      @alive = false
+    end
   end
 
   def add_apples
+    rand(1..500).times do
+    @apples << Apple.new('Green', rand(2.01..3.01))
+    end
   end
 
   def any_apples?
+    @apples.length > 0
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    raise NoApplesError, "This tree has no apples" unless any_apples?
+    @apples.delete_at(rand(@apples.length))
   end
 
   def dead?
+    !@alive
   end
 end
 
 class Fruit
+  attr_reader :has_seeds
+
   def initialize
-    has_seeds = true
+    @has_seeds = true
   end
 end
 
-class Apple <
-  attr_reader #what should go here 
+class Apple < Fruit
+  attr_reader :color, :diameter
 
   def initialize(color, diameter)
+    super()
+    @color = color
+    @diameter = diameter
   end
 end
-
-#THERES ONLY ONE THING YOU NEED TO EDIT BELOW THIS LINE
-# avg_diameter (line 58) will raise an error.
-# it should calculate the diameter of the apples in the basket
 
 def tree_data
   tree = Tree.new
@@ -57,15 +83,15 @@ def tree_data
 
     diameter_sum = 0
 
-    basket.each do |apple|
+    basket.each do |apple| #method invocation with a block
       diameter_sum += apple.diameter
     end
 
-    avg_diameter = # It's up to you to calculate the average diameter for this harvest.
+    avg_diameter = diameter_sum/basket.length #sum of diameters/total number of apples
 
     puts "Year #{tree.age} Report"
-    puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
+    puts "Tree height: #{tree.height.round(2)} feet"
+    puts "Harvest:     #{basket.size.round(2)} apples with an average diameter of #{avg_diameter.round(2)} inches"
     puts ""
 
     # Ages the tree another year
@@ -75,5 +101,4 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-# Uncomment this line to run the script, but BE SURE to comment it before you try to run your tests!
-# tree_data
+tree_data
